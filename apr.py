@@ -56,9 +56,14 @@ for farmName, payload in lpAddresses.items():
     rewardsPerSecond = payload["this_months_rewards"] / 30 / 24 / 60 / 60
 
     farmTvl = 0
+
     if farmName == "Stables Farm":
         deposited_token = init_token(w3, payload["deposited_token_address"])
         # assume LP token = $1 for stables farm
+        farmTvl = deposited_token.functions.balanceOf(payload["farm_address"]).call()
+    elif farmName == "Frax Farm":
+        deposited_token = init_token(w3, payload["deposited_token_address"])
+        # assume LP token = $1 for frax farm
         farmTvl = deposited_token.functions.balanceOf(payload["farm_address"]).call()
 
     apr_float = getAPR(roseprice, rewardsPerSecond, farmTvl)
@@ -71,7 +76,7 @@ for farmName, payload in lpAddresses.items():
             "farm_tvl": str(farmTvl),
             "apr": apr,
         }
-    }) 
+    })
 
 with open('data.json', 'w', encoding='utf-8') as f:
     json.dump(data, f, ensure_ascii=False, indent=4)
