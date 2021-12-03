@@ -66,6 +66,8 @@ for farmName, payload in lpAddresses.items():
         # assume LP token = $1 for frax farm
         farmTvl = deposited_token.functions.balanceOf(payload["farm_address"]).call()
 
+    # TODO: fetch virtual price for tokens of nonstablecoins and multiply against balance
+
     apr_float = getAPR(roseprice, rewardsPerSecond, farmTvl)
     apr = str("{:0.1f}".format(apr_float)) + "%"
 
