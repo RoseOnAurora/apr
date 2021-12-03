@@ -11,7 +11,28 @@ lpAddresses = {
         "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
         "farm_address": "0x52CACa9a2D52b27b28767d3649565774A3B991f3",
         "this_months_rewards": 1000.00
-    }
+    },
+    # upadate the addresses of the rest
+    "Frax Farm": {
+        "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
+        "farm_address": "0x52CACa9a2D52b27b28767d3649565774A3B991f3",
+        "this_months_rewards": 1000.00
+    },
+    "stRose Farm": {
+        "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
+        "farm_address": "0x52CACa9a2D52b27b28767d3649565774A3B991f3",
+        "this_months_rewards": 1000.00
+    },
+    "ROSE/FRAX NLP Farm": {
+        "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
+        "farm_address": "0x52CACa9a2D52b27b28767d3649565774A3B991f3",
+        "this_months_rewards": 1000.00
+    },
+    "stRose Farm": {
+        "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
+        "farm_address": "0x52CACa9a2D52b27b28767d3649565774A3B991f3",
+        "this_months_rewards": 1000.00
+    },
 }
 data = []
 rose_data = []
@@ -44,10 +65,11 @@ for farmName, payload in lpAddresses.items():
     apr = str("{:0.1f}".format(apr_float)) + "%"
 
     data.append({
-        "farm": farmName,
-        "deposited_token_address": payload["deposited_token_address"],
-        "farm_tvl": str(farmTvl),
-        "apr": apr,
+        farmName: {
+            "deposited_token_address": payload["deposited_token_address"],
+            "farm_tvl": str(farmTvl),
+            "apr": apr,
+        }
     }) 
 
 with open('data.json', 'w', encoding='utf-8') as f:

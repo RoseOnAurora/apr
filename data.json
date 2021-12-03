@@ -1,8 +1,30 @@
 [
     {
-        "farm": "Stables Farm",
-        "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
-        "farm_tvl": "0",
-        "apr": "0.0%"
+        "Stables Farm": {
+            "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
+            "farm_tvl": "0",
+            "apr": "0.0%"
+        }
+    },
+    {
+        "Frax Farm": {
+            "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
+            "farm_tvl": "0",
+            "apr": "0.0%"
+        }
+    },
+    {
+        "stRose Farm": {
+            "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
+            "farm_tvl": "0",
+            "apr": "0.0%"
+        }
+    },
+    {
+        "ROSE/FRAX NLP Farm": {
+            "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
+            "farm_tvl": "0",
+            "apr": "0.0%"
+        }
     }
 ]
