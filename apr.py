@@ -72,12 +72,11 @@ for farmName, payload in lpAddresses.items():
     apr = str("{:0.1f}".format(apr_float)) + "%"
 
     data.append({
-        farmName: {
-            "deposited_token_address": payload["deposited_token_address"],
-            "farm_address": payload["farm_address"],
-            "farm_tvl": str(farmTvl),
-            "apr": apr,
-        }
+        "name": farmName,
+        "deposited_token_address": payload["deposited_token_address"],
+        "farm_address": payload["farm_address"],
+        "farm_tvl": str(farmTvl),
+        "apr": apr, 
     })
 
 with open('data.json', 'w', encoding='utf-8') as f:
