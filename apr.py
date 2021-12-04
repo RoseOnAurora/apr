@@ -89,9 +89,8 @@ for farmName, payload in lpAddresses.items():
         try:
             farmBalance = deposited_token.functions.balanceOf(payload["farm_address"]).call()
             farmBalance = farmBalance / 10**18
-            print("Farm balance:", farmBalance)
-            print("Rose price:", roseprice)
-            farmTvl = int(round(farmBalance * (roseprice / 10**18)))
+            roseFloat = round(float(roseprice) / 10**18, 3)
+            farmTvl = str(int(round(farmBalance * roseFloat))) + "000000000000000000"
         except:
             print("Error getting farm balance for", farmName)
     elif farmName == "ROSE/PAD NLP Farm":
