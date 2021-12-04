@@ -15,18 +15,18 @@ lpAddresses = {
         "pool_address": "0xc90dB0d8713414d78523436dC347419164544A3f",
         "this_months_rewards": 450275.00
     },
-    "Frax Farm": {
-        "deposited_token_address": "0xbB5279353d88A25F099A334Ba49CDCb1CF4b5A7c",
-        "farm_address": "0x7b359Af630a195C05Ac625D261aEe09a69aF7744",
-        "pool_address": "0xd812cc1fc1e0a56560796C746B1247e2bd4F31f2",
-        "this_months_rewards": 1000.00
-    },
-    "stRose Farm": {
-        "deposited_token_address": "0x7Ba8C17010a48283D38a4bd5f87EfEB5594c92f8",
-        "farm_address": "0x247c9DA96BfC4720580ee84E01566D79a8c901ca",
-        "pool_address": "0x36685AfD221622942Df61979d72a0064a17EF291",
-        "this_months_rewards": 1000.00
-    },
+    # "Frax Farm": {
+    #     "deposited_token_address": "0xbB5279353d88A25F099A334Ba49CDCb1CF4b5A7c",
+    #     "farm_address": "0x7b359Af630a195C05Ac625D261aEe09a69aF7744",
+    #     "pool_address": "0xd812cc1fc1e0a56560796C746B1247e2bd4F31f2",
+    #     "this_months_rewards": 1000.00
+    # },
+    # "stRose Farm": {
+    #     "deposited_token_address": "0x7Ba8C17010a48283D38a4bd5f87EfEB5594c92f8",
+    #     "farm_address": "0x247c9DA96BfC4720580ee84E01566D79a8c901ca",
+    #     "pool_address": "0x36685AfD221622942Df61979d72a0064a17EF291",
+    #     "this_months_rewards": 1000.00
+    # },
     "ROSE/FRAX NLP Farm": {
         "deposited_token_address": "0xeD4C231b98b474f7cAeCAdD2736e5ebC642ad707",
         "farm_address": "0x1B10bFCd6192edC573ced7Db7c7e403c7FAb8068",
@@ -85,7 +85,8 @@ for farmName, payload in lpAddresses.items():
         # calculate TVL
         try:
             farmBalance = deposited_token.functions.balanceOf(payload["farm_address"]).call()
-            farmTvl = farmBalance * roseprice
+            farmBalance = farmBalance / 10**18
+            farmTvl = int(round(farmBalance * (roseprice / 10**18)))
         except:
             print("Error getting farm balance for", farmName)
     elif farmName == "ROSE/PAD NLP Farm":
@@ -93,11 +94,14 @@ for farmName, payload in lpAddresses.items():
         pool = init_nearpadpool(w3, payload["deposited_token_address"])
         try:
             farmBalance = deposited_token.functions.balanceOf(payload["farm_address"]).call()
+            farmBalance = farmBalance / 10**18
+            print("Farm balance:", farmBalance)
             reserves = pool.functions.getReserves().call()
             reservesRose = reserves[0]
             reservesPad = reserves[1]
             virtualPrice = reservesPad / reservesRose
-            farmTvl = farmBalance * virtualPrice
+            farmTvl = int(round(farmBalance * virtualPrice))
+            farmTvl = farmTvl * 10**18
         except:
             print("Error getting virtual price for", farmName)
         
