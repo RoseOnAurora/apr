@@ -47,7 +47,10 @@ rosefraxpool = init_rosefraxpool(w3)
 rose = init_token(w3, "0xdcD6D4e2B3e1D1E1E6Fa8C21C8A323DcbecfF970")
 roseprice = 0
 try:
-    roseprice = rosefraxpool.functions.price0CumulativeLast().call()
+    roseprice = str(rosefraxpool.functions.price0CumulativeLast().call())
+    l = len(roseprice)
+    roseprice = roseprice[:l-23]
+    print("ROSE/FRAX price: " + roseprice)
     # stroseBalance = 
 except:
     print("Error getting price of ROSE against FRAX")
@@ -86,6 +89,8 @@ for farmName, payload in lpAddresses.items():
         try:
             farmBalance = deposited_token.functions.balanceOf(payload["farm_address"]).call()
             farmBalance = farmBalance / 10**18
+            print("Farm balance:", farmBalance)
+            print("Rose price:", roseprice)
             farmTvl = int(round(farmBalance * (roseprice / 10**18)))
         except:
             print("Error getting farm balance for", farmName)
@@ -104,8 +109,9 @@ for farmName, payload in lpAddresses.items():
             farmTvl = farmTvl * 10**18
         except:
             print("Error getting virtual price for", farmName)
-        
-    apr_float = getAPR(roseprice, rewardsPerSecond, farmTvl)
+    
+    # apr_float = getAPR(roseprice, rewardsPerSecond, farmTvl)
+    apr_float = 0
     apr = str("{:0.1f}".format(apr_float)) + "%"
 
     data.append({
