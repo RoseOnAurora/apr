@@ -10,6 +10,13 @@ def init_rosefraxpool(w3):
             abi=json.load(json_file)
         )
 
+def init_nearpadpool(w3, poolAddress):
+    with open('abis/NearPadPool.json') as json_file:
+        return w3.eth.contract(
+            address=poolAddress,
+            abi=json.load(json_file)
+        )
+
 def init_token(w3, tokenAddress):
     with open('abis/erc20.json') as json_file:
         return w3.eth.contract(

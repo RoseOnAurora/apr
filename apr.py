@@ -3,6 +3,7 @@ from web3 import Web3
 from utils import (
     init_rosefraxpool, 
     init_rosepool,
+    init_nearpadpool,
     init_token,
     getAPR,
 )
@@ -14,7 +15,6 @@ lpAddresses = {
         "pool_address": "0xc90dB0d8713414d78523436dC347419164544A3f",
         "this_months_rewards": 1000.00
     },
-    # upadate the addresses of the rest
     "Frax Farm": {
         "deposited_token_address": "0xbB5279353d88A25F099A334Ba49CDCb1CF4b5A7c",
         "farm_address": "0x7b359Af630a195C05Ac625D261aEe09a69aF7744",
@@ -60,28 +60,43 @@ for farmName, payload in lpAddresses.items():
     rewardsPerSecond = payload["this_months_rewards"] / 30 / 24 / 60 / 60
 
     farmTvl = 0
+    deposited_token = init_token(w3, payload["deposited_token_address"])
 
     if farmName == "Stables Farm":
-        deposited_token = init_token(w3, payload["deposited_token_address"])
         # assume LP token = $1 for stables farm
         farmTvl = deposited_token.functions.balanceOf(payload["farm_address"]).call()
     elif farmName == "Frax Farm":
-        deposited_token = init_token(w3, payload["deposited_token_address"])
         # assume LP token = $1 for frax farm
         farmTvl = deposited_token.functions.balanceOf(payload["farm_address"]).call()
     elif farmName == "stRose Farm":
-        deposited_token = init_token(w3, payload["deposited_token_address"])
-        farmBalance = deposited_token.functions.balanceOf(payload["farm_address"]).call()
         # calculate TVL by multiplying the balance of the farm by the virtual price
+        farmBalance = deposited_token.functions.balanceOf(payload["farm_address"]).call()
         pool = init_rosepool(w3, payload["pool_address"])
         try:
             virtualPrice = pool.functions.get_virtual_price().call()
             farmTvl = farmBalance * virtualPrice
         except:
             print("Error getting virtual price for", farmName)
-
-    # TODO: fetch virtual price for tokens of nonstablecoins and multiply against balance
-
+    elif farmName == "ROSE/FRAX NLP Farm":
+        # calculate TVL
+        try:
+            farmBalance = deposited_token.functions.balanceOf(payload["farm_address"]).call()
+            farmTvl = farmBalance * roseprice
+        except:
+            print("Error getting farm balance for", farmName)
+    elif farmName == "ROSE/PAD NLP Farm":
+        # calculate TVL
+        pool = init_nearpadpool(w3, payload["deposited_token_address"])
+        try:
+            farmBalance = deposited_token.functions.balanceOf(payload["farm_address"]).call()
+            reserves = pool.functions.getReserves().call()
+            reservesRose = reserves[0]
+            reservesPad = reserves[1]
+            virtualPrice = reservesPad / reservesRose
+            farmTvl = farmBalance * virtualPrice
+        except:
+            print("Error getting virtual price for", farmName)
+        
     apr_float = getAPR(roseprice, rewardsPerSecond, farmTvl)
     apr = str("{:0.1f}".format(apr_float)) + "%"
 
