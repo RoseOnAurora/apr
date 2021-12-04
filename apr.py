@@ -2,6 +2,7 @@ import json
 from web3 import Web3
 from utils import (
     init_rosefraxpool, 
+    init_rosepool,
     init_token,
     getAPR,
 )
@@ -10,17 +11,20 @@ lpAddresses = {
     "Stables Farm": {
         "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
         "farm_address": "0x52CACa9a2D52b27b28767d3649565774A3B991f3",
+        "pool_address": "0xc90dB0d8713414d78523436dC347419164544A3f",
         "this_months_rewards": 1000.00
     },
     # upadate the addresses of the rest
     "Frax Farm": {
         "deposited_token_address": "0xbB5279353d88A25F099A334Ba49CDCb1CF4b5A7c",
         "farm_address": "0x7b359Af630a195C05Ac625D261aEe09a69aF7744",
+        "pool_address": "0xd812cc1fc1e0a56560796C746B1247e2bd4F31f2",
         "this_months_rewards": 1000.00
     },
     "stRose Farm": {
         "deposited_token_address": "0x7Ba8C17010a48283D38a4bd5f87EfEB5594c92f8",
         "farm_address": "0x247c9DA96BfC4720580ee84E01566D79a8c901ca",
+        "pool_address": "0x36685AfD221622942Df61979d72a0064a17EF291",
         "this_months_rewards": 1000.00
     },
     "ROSE/FRAX NLP Farm": {
@@ -65,6 +69,16 @@ for farmName, payload in lpAddresses.items():
         deposited_token = init_token(w3, payload["deposited_token_address"])
         # assume LP token = $1 for frax farm
         farmTvl = deposited_token.functions.balanceOf(payload["farm_address"]).call()
+    elif farmName == "stRose Farm":
+        deposited_token = init_token(w3, payload["deposited_token_address"])
+        farmBalance = deposited_token.functions.balanceOf(payload["farm_address"]).call()
+        # calculate TVL by multiplying the balance of the farm by the virtual price
+        pool = init_rosepool(w3, payload["pool_address"])
+        try:
+            virtualPrice = pool.functions.get_virtual_price().call()
+            farmTvl = farmBalance * virtualPrice
+        except:
+            print("Error getting virtual price for", farmName)
 
     # TODO: fetch virtual price for tokens of nonstablecoins and multiply against balance
 

@@ -17,6 +17,13 @@ def init_token(w3, tokenAddress):
             abi=json.load(json_file)
         )
 
+def init_rosepool(w3, poolAddress):
+    with open('abis/RosePool.json') as json_file:
+        return w3.eth.contract(
+            address=poolAddress,
+            abi=json.load(json_file)
+        )
+
 def getAPR(priceInUsd, totalRewardRate, totalStakedInUsd):
     if totalStakedInUsd == 0:
         return 0
