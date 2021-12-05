@@ -90,8 +90,8 @@ for farmName, payload in lpAddresses.items():
             # reserves = pool.functions.getReserves().call()
             # rose_reserves = round(float(reserves[0]) / 10**18, 0)
             # frax_reserves = round(float(reserves[1]) / 10**18, 0)
-            print("rose reservers", rose_reserves)
-            virtualPrice = frax_reserves / rose_reserves
+            # print("rose reservers", rose_reserves)
+            virtualPrice = roseprice
             print("ROSE/FRAX NLP virtual price:", virtualPrice)
             farmTvl = int(round(farmBalance * virtualPrice))
             farmTvl = farmTvl * 10**18
@@ -105,8 +105,8 @@ for farmName, payload in lpAddresses.items():
             farmBalance = farmBalance / 10**18
             print("Farm balance:", farmBalance)
             reserves = pool.functions.getReserves().call()
-            reservesRose = reserves[0]
-            reservesPad = reserves[1]
+            reservesRose = round(float(pool_reserves[0]) / 10**18, 0)
+            reservesPad = round(float(pool_reserves[1]) / 10**18, 0)
             virtualPrice = reservesPad / reservesRose
             farmTvl = int(round(farmBalance * virtualPrice))
             farmTvl = farmTvl * 10**18
@@ -123,7 +123,8 @@ for farmName, payload in lpAddresses.items():
     apr_float = getAPR(roseprice, rewardsPerSecond, farmTvlFloat)
     # apr_float = 0
     # print("APR float:", apr_float)
-    apr = str("{:0.1f}".format(apr_float)) + "%"
+    # apr = str("{:0.1f}".format(apr_float)) + "%"
+    apr = str(int(round(apr_float))) + "%"
 
     data.append({
         "name": farmName,
