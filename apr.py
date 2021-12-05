@@ -44,16 +44,13 @@ w3 = Web3(Web3.HTTPProvider("https://mainnet.aurora.dev/"))
 
 # get price of ROSE against FRAX
 rosefraxpool = init_rosefraxpool(w3)
-rose = init_token(w3, "0xdcD6D4e2B3e1D1E1E6Fa8C21C8A323DcbecfF970")
 roseprice = 0
-try:
-    roseprice = str(rosefraxpool.functions.price0CumulativeLast().call())
-    l = len(roseprice)
-    roseprice = roseprice[:l-23]
-    print("ROSE/FRAX price: " + roseprice)
-    # stroseBalance = 
-except:
-    print("Error getting price of ROSE against FRAX")
+pool_reserves = rosefraxpool.functions.getReserves().call()
+rose_reserves = round(float(pool_reserves[0]) / 10**18, 0)
+frax_reserves = round(float(pool_reserves[1]) / 10**18, 0)
+print("ROSE/FRAX reserves: ", rose_reserves, frax_reserves)
+roseprice = rose_reserves / frax_reserves
+print("ROSE/FRAX price: ", roseprice)
 
 rose_data.append({
     "price_of_rose": str(roseprice)
@@ -89,8 +86,15 @@ for farmName, payload in lpAddresses.items():
         try:
             farmBalance = deposited_token.functions.balanceOf(payload["farm_address"]).call()
             farmBalance = farmBalance / 10**18
-            roseFloat = round(float(roseprice) / 10**18, 3)
-            farmTvl = str(int(round(farmBalance * roseFloat))) + "000000000000000000"
+            print("Farm balance:", farmBalance)
+            # reserves = pool.functions.getReserves().call()
+            # rose_reserves = round(float(reserves[0]) / 10**18, 0)
+            # frax_reserves = round(float(reserves[1]) / 10**18, 0)
+            print("rose reservers", rose_reserves)
+            virtualPrice = frax_reserves / rose_reserves
+            print("ROSE/FRAX NLP virtual price:", virtualPrice)
+            farmTvl = int(round(farmBalance * virtualPrice))
+            farmTvl = farmTvl * 10**18
         except:
             print("Error getting farm balance for", farmName)
     elif farmName == "ROSE/PAD NLP Farm":
@@ -107,17 +111,18 @@ for farmName, payload in lpAddresses.items():
             farmTvl = int(round(farmBalance * virtualPrice))
             farmTvl = farmTvl * 10**18
         except:
-            print("Error getting virtual price for", farmName)
+            print("Error getting farm balance for", farmName)
     
-    print("rewardsPerSecond:", rewardsPerSecond)
-    print("farmTvl:", farmTvl)
-    farmTvlFloat = float(farmTvl) / 10**18
-    print("farmTvlFloat:", farmTvlFloat)
-    roseFloat = float(roseprice) / 10**18
-    print("roseFloat:", roseFloat)
-    apr_float = getAPR(roseFloat, rewardsPerSecond, farmTvlFloat)
+    # print("roseprice:", roseprice)
+    rewardsPerSecond = round(rewardsPerSecond, 3)
+    # print("rewardsPerSecond:", rewardsPerSecond)
+    # print("farmTvl:", farmTvl)
+    farmTvl = str(farmTvl)
+    farmTvlFloat = int(farmTvl[:len(farmTvl)-12]) # convert to 6 decimals precision
+    # print("farmTvlFloat:", farmTvlFloat)
+    apr_float = getAPR(roseprice, rewardsPerSecond, farmTvlFloat)
     # apr_float = 0
-    print("APR float:", apr_float)
+    # print("APR float:", apr_float)
     apr = str("{:0.1f}".format(apr_float)) + "%"
 
     data.append({
