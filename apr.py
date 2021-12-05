@@ -27,12 +27,12 @@ lpAddresses = {
     #     "pool_address": "0x36685AfD221622942Df61979d72a0064a17EF291",
     #     "this_months_rewards": 1000.00
     # },
-    "ROSE/FRAX NLP Farm": {
+    "ROSE/FRAX PLP Farm": {
         "deposited_token_address": "0xeD4C231b98b474f7cAeCAdD2736e5ebC642ad707",
         "farm_address": "0x1B10bFCd6192edC573ced7Db7c7e403c7FAb8068",
         "this_months_rewards": 225137.00
     },
-    "ROSE/PAD NLP Farm": {
+    "ROSE/PAD PLP Farm": {
         "deposited_token_address": "0xC6C3cc84EabD4643C382C988fA2830657fc70a6B",
         "farm_address": "0x9b2aE7d53099Ec64e2f6df3B4151FFCf7205f788",
         "this_months_rewards": 525321.00
@@ -86,7 +86,7 @@ for farmName, payload in lpAddresses.items():
         # assume LP token = $1 for frax farm
         virtualPrice = 1.0
         farmTvl = farmBalance
-    elif farmName == "ROSE/FRAX NLP Farm":
+    elif farmName == "ROSE/FRAX PLP Farm":
         farmBalance = farmBalance / 10**18
         try:
             # assume pool is balanced and multiply FRAX reserve by two
@@ -95,7 +95,7 @@ for farmName, payload in lpAddresses.items():
             farmTvl = farmTvl * 10**18
         except:
             print("Error getting farm balance for", farmName)
-    elif farmName == "ROSE/PAD NLP Farm":
+    elif farmName == "ROSE/PAD PLP Farm":
         farmBalance = farmBalance / 10**18
         pool = init_nearpadpool(w3, payload["deposited_token_address"])
         try:
