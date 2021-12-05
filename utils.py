@@ -37,14 +37,8 @@ def getAPR(rosePriceInUsd, roseRewardRate, totalStakedInUsd):
     else:
         totalYearlyRewards = roseRewardRate * 3600 * 24 * 365
         totalYearlyRewardsUsd = totalYearlyRewards * rosePriceInUsd
-        print("totalYearlyRewardsUsd: ", totalYearlyRewardsUsd)
-        print("totalStakedInUsd: ", totalStakedInUsd)
 
         futureValue = totalStakedInUsd + totalYearlyRewardsUsd
-        print("futureValue: ", futureValue)
 
-        answer = (float(totalYearlyRewardsUsd) / float(totalStakedInUsd)) * 100
-        print("answer: ", answer)
-
-        return answer
+        return (float(totalYearlyRewardsUsd) / float(totalStakedInUsd)) * 100
 

@@ -48,7 +48,7 @@ roseprice = 0
 pool_reserves = rosefraxpool.functions.getReserves().call()
 frax_reserves = round(float(pool_reserves[0]) / 10**18, 0)
 rose_reserves = round(float(pool_reserves[1]) / 10**18, 0)
-print("ROSE/FRAX reserves: ", frax_reserves, rose_reserves)
+print("ROSE/FRAX reserves: ", rose_reserves, frax_reserves)
 roseprice = frax_reserves / rose_reserves
 print("ROSE/FRAX price: ", roseprice)
 
@@ -71,10 +71,13 @@ for farmName, payload in lpAddresses.items():
     farmBalance = 0
     try:
         farmBalance = deposited_token.functions.balanceOf(payload["farm_address"]).call()
+        farmBalanceStr = str(farmBalance)
+        print(farmName, "deposits balance:", float(farmBalanceStr[:len(farmBalanceStr)-18]))
     except:
         print("Error fetching farm balance")
         continue
 
+    # calculate virtual price and TVL
     if farmName == "Stables Farm":
         # assume LP token = $1 for stables farm
         virtualPrice = 1.0
@@ -87,20 +90,17 @@ for farmName, payload in lpAddresses.items():
         farmBalance = farmBalance / 10**18
         try:
             # assume pool is balanced and multiply FRAX reserve by two
-            print("FRAX reserves: ", frax_reserves)
-            virtualPrice = frax_reserves*2 / farmBalance
+            virtualPrice = float(frax_reserves*2) / float(farmBalance)
             farmTvl = int(round(farmBalance * virtualPrice))
             farmTvl = farmTvl * 10**18
         except:
             print("Error getting farm balance for", farmName)
     elif farmName == "ROSE/PAD NLP Farm":
-        # calculate TVL
         farmBalance = farmBalance / 10**18
         pool = init_nearpadpool(w3, payload["deposited_token_address"])
         try:
             reserves = pool.functions.getReserves().call()
             reservesRose = float(reserves[1])
-            print("PAD reserves: ", reservesRose)
             reservesRose = round(reservesRose / 10**18, 0)
             # assupme pool is balanced and multiply ROSE usd value reserves by two
             virtualPrice = (reservesRose*roseprice)*2 / farmBalance
@@ -108,17 +108,16 @@ for farmName, payload in lpAddresses.items():
             farmTvl = farmTvl * 10**18
         except:
             print("Error getting farm balance for", farmName)
+
+    print(farmName, "deposit token virtual price:", virtualPrice)
     
-    # print("roseprice:", roseprice)
-    # rewardsPerSecond = round(rewardsPerSecond, 3)
-    # print("rewardsPerSecond:", rewardsPerSecond)
-    print("farmTvl:", farmTvl)
+    # format TVL to float for apr calculation
     farmTvl = str(farmTvl)
     farmTvlFloat = float(farmTvl[:len(farmTvl)-18])
-    print("farmTvlFloat:", farmTvlFloat)
+    print(farmName, "deposits TVL:", farmTvlFloat)
+    
+    # calculate APR
     apr_float = getAPR(roseprice, rewardsPerSecond, farmTvlFloat)
-    # apr_float = 0
-    print("APR float:", apr_float)
     apr = str("{:0.1f}".format(apr_float)) + "%"
     # apr = str(int(round(apr_float))) + "%"
 
