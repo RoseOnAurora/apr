@@ -31,9 +31,20 @@ def init_rosepool(w3, poolAddress):
             abi=json.load(json_file)
         )
 
-def getAPR(priceInUsd, totalRewardRate, totalStakedInUsd):
+def getAPR(rosePriceInUsd, roseRewardRate, totalStakedInUsd):
     if totalStakedInUsd == 0:
         return 0
     else:
-        totalYearlyRewards = totalRewardRate * 3600 * 24 * 365
-        return totalYearlyRewards/(totalStakedInUsd*priceInUsd)
+        totalYearlyRewards = roseRewardRate * 3600 * 24 * 365
+        totalYearlyRewardsUsd = totalYearlyRewards * rosePriceInUsd
+        print("totalYearlyRewardsUsd: ", totalYearlyRewardsUsd)
+        print("totalStakedInUsd: ", totalStakedInUsd)
+
+        futureValue = totalStakedInUsd + totalYearlyRewardsUsd
+        print("futureValue: ", futureValue)
+
+        answer = (float(totalYearlyRewardsUsd) / float(totalStakedInUsd)) * 100
+        print("answer: ", answer)
+
+        return answer
+

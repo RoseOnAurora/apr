@@ -100,6 +100,7 @@ for farmName, payload in lpAddresses.items():
         try:
             reserves = pool.functions.getReserves().call()
             reservesRose = float(reserves[1])
+            print("PAD reserves: ", reservesRose)
             reservesRose = round(reservesRose / 10**18, 0)
             # assupme pool is balanced and multiply ROSE usd value reserves by two
             virtualPrice = (reservesRose*roseprice)*2 / farmBalance
@@ -109,7 +110,7 @@ for farmName, payload in lpAddresses.items():
             print("Error getting farm balance for", farmName)
     
     # print("roseprice:", roseprice)
-    rewardsPerSecond = round(rewardsPerSecond, 3)
+    # rewardsPerSecond = round(rewardsPerSecond, 3)
     # print("rewardsPerSecond:", rewardsPerSecond)
     print("farmTvl:", farmTvl)
     farmTvl = str(farmTvl)
@@ -118,8 +119,8 @@ for farmName, payload in lpAddresses.items():
     apr_float = getAPR(roseprice, rewardsPerSecond, farmTvlFloat)
     # apr_float = 0
     print("APR float:", apr_float)
-    # apr = str("{:0.1f}".format(apr_float)) + "%"
-    apr = str(int(round(apr_float))) + "%"
+    apr = str("{:0.1f}".format(apr_float)) + "%"
+    # apr = str(int(round(apr_float))) + "%"
 
     data.append({
         "name": farmName,
@@ -127,6 +128,7 @@ for farmName, payload in lpAddresses.items():
         "farm_address": payload["farm_address"],
         "farm_tvl": str(farmTvl),
         "deposited_token_price": str(virtualPrice),
+        "rewards_per_second": str(rewardsPerSecond),
         "apr": apr, 
     })
 
