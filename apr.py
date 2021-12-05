@@ -109,8 +109,15 @@ for farmName, payload in lpAddresses.items():
         except:
             print("Error getting virtual price for", farmName)
     
-    # apr_float = getAPR(roseprice, rewardsPerSecond, farmTvl)
-    apr_float = 0
+    print("rewardsPerSecond:", rewardsPerSecond)
+    print("farmTvl:", farmTvl)
+    farmTvlFloat = float(farmTvl) / 10**18
+    print("farmTvlFloat:", farmTvlFloat)
+    roseFloat = float(roseprice) / 10**18
+    print("roseFloat:", roseFloat)
+    apr_float = getAPR(roseFloat, rewardsPerSecond, farmTvlFloat)
+    # apr_float = 0
+    print("APR float:", apr_float)
     apr = str("{:0.1f}".format(apr_float)) + "%"
 
     data.append({
