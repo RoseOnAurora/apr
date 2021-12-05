@@ -36,4 +36,4 @@ def getAPR(priceInUsd, totalRewardRate, totalStakedInUsd):
         return 0
     else:
         totalYearlyRewards = totalRewardRate * 3600 * 24 * 365
-        return totalYearlyRewards*100*10**6/(totalStakedInUsd*priceInUsd)
+        return totalYearlyRewards*100/(totalStakedInUsd*priceInUsd)

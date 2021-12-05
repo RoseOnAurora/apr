@@ -65,61 +65,54 @@ for farmName, payload in lpAddresses.items():
 
     farmTvl = 0
     deposited_token = init_token(w3, payload["deposited_token_address"])
+    virtualPrice = 0
+
+    # fetch farm balance
+    farmBalance = 0
+    try:
+        farmBalance = deposited_token.functions.balanceOf(payload["farm_address"]).call()
+    except:
+        print("Error fetching farm balance")
+        continue
 
     if farmName == "Stables Farm":
         # assume LP token = $1 for stables farm
-        farmTvl = deposited_token.functions.balanceOf(payload["farm_address"]).call()
+        virtualPrice = 1.0
+        farmTvl = farmBalance
     elif farmName == "Frax Farm":
         # assume LP token = $1 for frax farm
-        farmTvl = deposited_token.functions.balanceOf(payload["farm_address"]).call()
-    elif farmName == "stRose Farm":
-        # calculate TVL by multiplying the balance of the farm by the virtual price
-        farmBalance = deposited_token.functions.balanceOf(payload["farm_address"]).call()
-        pool = init_rosepool(w3, payload["pool_address"])
-        try:
-            virtualPrice = pool.functions.get_virtual_price().call()
-            farmTvl = farmBalance * virtualPrice
-        except:
-            print("Error getting virtual price for", farmName)
+        virtualPrice = 1.0
+        farmTvl = farmBalance
     elif farmName == "ROSE/FRAX NLP Farm":
-        # calculate TVL
+        farmBalance = farmBalance / 10**18
         try:
-            farmBalance = deposited_token.functions.balanceOf(payload["farm_address"]).call()
-            farmBalance = farmBalance / 10**18
-            print("Farm balance:", farmBalance)
-            # reserves = pool.functions.getReserves().call()
-            # rose_reserves = round(float(reserves[0]) / 10**18, 0)
-            # frax_reserves = round(float(reserves[1]) / 10**18, 0)
-            # print("rose reservers", rose_reserves)
-            virtualPrice = roseprice
-            print("ROSE/FRAX NLP virtual price:", virtualPrice)
+            virtualPrice = frax_reserves*2 / farmBalance
             farmTvl = int(round(farmBalance * virtualPrice))
             farmTvl = farmTvl * 10**18
         except:
             print("Error getting farm balance for", farmName)
     elif farmName == "ROSE/PAD NLP Farm":
         # calculate TVL
+        farmBalance = farmBalance / 10**18
         pool = init_nearpadpool(w3, payload["deposited_token_address"])
         try:
-            farmBalance = deposited_token.functions.balanceOf(payload["farm_address"]).call()
-            farmBalance = farmBalance / 10**18
-            print("Farm balance:", farmBalance)
             reserves = pool.functions.getReserves().call()
             reservesRose = round(float(pool_reserves[0]) / 10**18, 0)
-            reservesPad = round(float(pool_reserves[1]) / 10**18, 0)
-            virtualPrice = reservesPad / reservesRose
-            farmTvl = int(round(farmBalance * virtualPrice))
-            farmTvl = farmTvl * 10**18
+            print("ROSE reserves: ", reservesRose)
+            virtualPrice = (reservesRose*roseprice) * 2.0 # assupme pool is balanced and multiply ROSE supply by two
+            print("virtual price: ", virtualPrice)
+            print("farm balance: ", farmBalance)
+            farmTvl = int(round(farmBalance * virtualPrice)) * 10**18
         except:
             print("Error getting farm balance for", farmName)
     
     # print("roseprice:", roseprice)
     rewardsPerSecond = round(rewardsPerSecond, 3)
     # print("rewardsPerSecond:", rewardsPerSecond)
-    # print("farmTvl:", farmTvl)
+    print("farmTvl:", farmTvl)
     farmTvl = str(farmTvl)
-    farmTvlFloat = int(farmTvl[:len(farmTvl)-12]) # convert to 6 decimals precision
-    # print("farmTvlFloat:", farmTvlFloat)
+    farmTvlFloat = float(farmTvl[:len(farmTvl)-18])
+    print("farmTvlFloat:", farmTvlFloat)
     apr_float = getAPR(roseprice, rewardsPerSecond, farmTvlFloat)
     # apr_float = 0
     # print("APR float:", apr_float)
@@ -131,6 +124,7 @@ for farmName, payload in lpAddresses.items():
         "deposited_token_address": payload["deposited_token_address"],
         "farm_address": payload["farm_address"],
         "farm_tvl": str(farmTvl),
+        "deposited_token_price": str(virtualPrice),
         "apr": apr, 
     })
 
