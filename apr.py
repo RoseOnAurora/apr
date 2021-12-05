@@ -46,10 +46,10 @@ w3 = Web3(Web3.HTTPProvider("https://mainnet.aurora.dev/"))
 rosefraxpool = init_rosefraxpool(w3)
 roseprice = 0
 pool_reserves = rosefraxpool.functions.getReserves().call()
-rose_reserves = round(float(pool_reserves[0]) / 10**18, 0)
-frax_reserves = round(float(pool_reserves[1]) / 10**18, 0)
-print("ROSE/FRAX reserves: ", rose_reserves, frax_reserves)
-roseprice = rose_reserves / frax_reserves
+frax_reserves = round(float(pool_reserves[0]) / 10**18, 0)
+rose_reserves = round(float(pool_reserves[1]) / 10**18, 0)
+print("ROSE/FRAX reserves: ", frax_reserves, rose_reserves)
+roseprice = frax_reserves / rose_reserves
 print("ROSE/FRAX price: ", roseprice)
 
 rose_data.append({
@@ -86,6 +86,8 @@ for farmName, payload in lpAddresses.items():
     elif farmName == "ROSE/FRAX NLP Farm":
         farmBalance = farmBalance / 10**18
         try:
+            # assume pool is balanced and multiply FRAX reserve by two
+            print("FRAX reserves: ", frax_reserves)
             virtualPrice = frax_reserves*2 / farmBalance
             farmTvl = int(round(farmBalance * virtualPrice))
             farmTvl = farmTvl * 10**18
@@ -97,12 +99,12 @@ for farmName, payload in lpAddresses.items():
         pool = init_nearpadpool(w3, payload["deposited_token_address"])
         try:
             reserves = pool.functions.getReserves().call()
-            reservesRose = round(float(pool_reserves[0]) / 10**18, 0)
-            print("ROSE reserves: ", reservesRose)
-            virtualPrice = (reservesRose*roseprice) * 2.0 # assupme pool is balanced and multiply ROSE supply by two
-            print("virtual price: ", virtualPrice)
-            print("farm balance: ", farmBalance)
-            farmTvl = int(round(farmBalance * virtualPrice)) * 10**18
+            reservesRose = float(reserves[1])
+            reservesRose = round(reservesRose / 10**18, 0)
+            # assupme pool is balanced and multiply ROSE usd value reserves by two
+            virtualPrice = (reservesRose*roseprice)*2 / farmBalance
+            farmTvl = int(round(farmBalance * virtualPrice))
+            farmTvl = farmTvl * 10**18
         except:
             print("Error getting farm balance for", farmName)
     
@@ -115,7 +117,7 @@ for farmName, payload in lpAddresses.items():
     print("farmTvlFloat:", farmTvlFloat)
     apr_float = getAPR(roseprice, rewardsPerSecond, farmTvlFloat)
     # apr_float = 0
-    # print("APR float:", apr_float)
+    print("APR float:", apr_float)
     # apr = str("{:0.1f}".format(apr_float)) + "%"
     apr = str(int(round(apr_float))) + "%"
 
