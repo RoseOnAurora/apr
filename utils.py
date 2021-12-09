@@ -2,11 +2,19 @@ import json
 
 # for fetching USD price of Rose
 NEARPAD_ROSE_FRAX_POOL = "0xeD4C231b98b474f7cAeCAdD2736e5ebC642ad707"
+NEARPAD_DEX_ROUTER = "0xBaE0d7DFcd03C90EBCe003C58332c1346A72836A"
 
 def init_rosefraxpool(w3):
     with open('abis/NearPadPool.json') as json_file:
         return w3.eth.contract(
             address=NEARPAD_ROSE_FRAX_POOL,
+            abi=json.load(json_file)
+        )
+
+def init_nearpad_dex_router(w3):
+    with open('abis/NearPadDEXRouter.json') as json_file:
+        return w3.eth.contract(
+            address=NEARPAD_DEX_ROUTER,
             abi=json.load(json_file)
         )
 

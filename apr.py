@@ -2,11 +2,19 @@ import json
 from web3 import Web3
 from utils import (
     init_rosefraxpool, 
+    init_nearpad_dex_router,
     init_rosepool,
     init_nearpadpool,
     init_token,
     getAPR,
 )
+
+ROSE = Web3.toChecksumAddress("0xdcD6D4e2B3e1D1E1E6Fa8C21C8A323DcbecfF970")
+PAD = Web3.toChecksumAddress("0x885f8CF6E45bdd3fdcDc644efdcd0AC93880c781")
+FRAX = Web3.toChecksumAddress("0xda2585430fef327ad8ee44af8f1f989a2a91a3d2")
+DAI = Web3.toChecksumAddress("0xe3520349F477A5F6EB06107066048508498A291b")
+USDC = Web3.toChecksumAddress("0xB12BFcA5A55806AaF64E99521918A4bf0fC40802")
+USDT = Web3.toChecksumAddress("0x4988a896b1227218e4A686fdE5EabdcAbd91571f")
 
 lpAddresses = {
     "Stables Farm": {
@@ -43,14 +51,28 @@ rose_data = []
 w3 = Web3(Web3.HTTPProvider("https://mainnet.aurora.dev/"))
 
 # get price of ROSE against FRAX
-rosefraxpool = init_rosefraxpool(w3)
-roseprice = 0
-pool_reserves = rosefraxpool.functions.getReserves().call()
-frax_reserves = round(float(pool_reserves[0]) / 10**18, 0)
-rose_reserves = round(float(pool_reserves[1]) / 10**18, 0)
-print("ROSE/FRAX reserves: ", rose_reserves, frax_reserves)
-roseprice = frax_reserves / rose_reserves
-print("ROSE/FRAX price: ", roseprice)
+
+# rose_reserves = round(float(pool_reserves[1]) / 10**18, 0)
+# print("ROSE/FRAX reserves: ", rose_reserves, frax_reserves)
+# roseprice = frax_reserves / rose_reserves
+# print("ROSE/FRAX price: ", roseprice)
+
+nearpad_dex_router = init_nearpad_dex_router(w3)
+rose_frax_price = (nearpad_dex_router.functions.getAmountsOut(10 ** 18, [ROSE, FRAX]).call())[1]
+rose_frax_price = float(rose_frax_price) / 10**18
+print("ROSE/FRAX price: ", rose_frax_price)
+rose_dai_price = (nearpad_dex_router.functions.getAmountsOut(10 ** 18, [ROSE, PAD, DAI]).call())[1]
+rose_dai_price = float(rose_dai_price) / 10**18
+print("ROSE/DAI price: ", rose_dai_price)
+rose_usdc_price = (nearpad_dex_router.functions.getAmountsOut(10 ** 18, [ROSE, PAD, USDC]).call())[1]
+rose_usdc_price = float(rose_usdc_price) / 10**18
+print("ROSE/USDC price: ", rose_usdc_price)
+rose_usdt_price = (nearpad_dex_router.functions.getAmountsOut(10 ** 18, [ROSE, PAD, USDT]).call())[1]
+rose_usdt_price = float(rose_usdt_price) / 10**18
+print("ROSE/USDT price: ", rose_usdt_price)
+
+roseprice = (rose_frax_price + rose_dai_price + rose_usdc_price + rose_usdt_price) / 4
+print("ROSE (averaged) price: ", roseprice)
 
 rose_data.append({
     "price_of_rose": str(roseprice)
@@ -89,6 +111,9 @@ for farmName, payload in lpAddresses.items():
     elif farmName == "ROSE/FRAX PLP Farm":
         farmBalance = farmBalance / 10**18
         try:
+            rosefraxpool = init_rosefraxpool(w3)
+            pool_reserves = rosefraxpool.functions.getReserves().call()
+            frax_reserves = round(float(pool_reserves[0]) / 10**18, 0)
             # assume pool is balanced and multiply FRAX reserve by two
             virtualPrice = float(frax_reserves*2) / float(farmBalance)
             farmTvl = int(round(farmBalance * virtualPrice))
