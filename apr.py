@@ -10,6 +10,7 @@ from utils import (
 )
 
 ROSE = Web3.toChecksumAddress("0xdcD6D4e2B3e1D1E1E6Fa8C21C8A323DcbecfF970")
+STROSE = Web3.toChecksumAddress("0xe23d2289FBca7De725DC21a13fC096787A85e16F")
 PAD = Web3.toChecksumAddress("0x885f8CF6E45bdd3fdcDc644efdcd0AC93880c781")
 FRAX = Web3.toChecksumAddress("0xda2585430fef327ad8ee44af8f1f989a2a91a3d2")
 DAI = Web3.toChecksumAddress("0xe3520349F477A5F6EB06107066048508498A291b")
@@ -50,32 +51,38 @@ data = []
 rose_data = []
 w3 = Web3(Web3.HTTPProvider("https://mainnet.aurora.dev/"))
 
-# get price of ROSE against FRAX
-
-# rose_reserves = round(float(pool_reserves[1]) / 10**18, 0)
-# print("ROSE/FRAX reserves: ", rose_reserves, frax_reserves)
-# roseprice = frax_reserves / rose_reserves
-# print("ROSE/FRAX price: ", roseprice)
-
+# get price of ROSE 
 nearpad_dex_router = init_nearpad_dex_router(w3)
 rose_frax_price = (nearpad_dex_router.functions.getAmountsOut(10 ** 18, [ROSE, FRAX]).call())[1]
 rose_frax_price = float(rose_frax_price) / 10**18
-print("ROSE/FRAX price: ", rose_frax_price)
 rose_dai_price = (nearpad_dex_router.functions.getAmountsOut(10 ** 18, [ROSE, PAD, DAI]).call())[1]
 rose_dai_price = float(rose_dai_price) / 10**18
-print("ROSE/DAI price: ", rose_dai_price)
 rose_usdc_price = (nearpad_dex_router.functions.getAmountsOut(10 ** 18, [ROSE, PAD, USDC]).call())[1]
 rose_usdc_price = float(rose_usdc_price) / 10**18
-print("ROSE/USDC price: ", rose_usdc_price)
 rose_usdt_price = (nearpad_dex_router.functions.getAmountsOut(10 ** 18, [ROSE, PAD, USDT]).call())[1]
 rose_usdt_price = float(rose_usdt_price) / 10**18
-print("ROSE/USDT price: ", rose_usdt_price)
-
 roseprice = (rose_frax_price + rose_dai_price + rose_usdc_price + rose_usdt_price) / 4
 print("ROSE (averaged) price: ", roseprice)
 
+# get tvl of stROSE
+rose_contract = init_token(w3, ROSE)
+strose_rose_balance_c = rose_contract.functions.balanceOf(STROSE).call()
+strose_rose_balance = float(strose_rose_balance_c) / 10**18
+strose_tvl = strose_rose_balance * roseprice
+strose_tvl = round(strose_tvl) * 10**18
+
+# get price of stRose
+strose_contract = init_token(w3, STROSE)
+strose_total_supply = strose_contract.functions.totalSupply().call()
+strose_total_supply = float(strose_total_supply) / 10**18
+print("stRose total supply: ", strose_total_supply)
+strose_price = strose_rose_balance / strose_total_supply
+
 rose_data.append({
-    "price_of_rose": str(roseprice)
+    "price_of_rose": str(roseprice),
+    "price_of_strose": str(strose_price),
+    "strose_tvl": str(strose_tvl),
+    "total_rose_staked": str(strose_rose_balance_c)
 })
 
 # fetch apr for each farm
