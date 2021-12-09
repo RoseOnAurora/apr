@@ -76,11 +76,13 @@ strose_contract = init_token(w3, STROSE)
 strose_total_supply = strose_contract.functions.totalSupply().call()
 strose_total_supply = float(strose_total_supply) / 10**18
 print("stRose total supply: ", strose_total_supply)
-strose_price = strose_rose_balance / strose_total_supply
+strose_rose_ratio = strose_rose_balance / strose_total_supply
+stroseprice = roseprice * strose_rose_ratio
 
 rose_data.append({
     "price_of_rose": str(roseprice),
-    "price_of_strose": str(strose_price),
+    "price_of_strose": str(stroseprice),
+    "strose_rose_ratio": str(strose_rose_ratio),
     "strose_tvl": str(strose_tvl),
     "total_rose_staked": str(strose_rose_balance_c)
 })
