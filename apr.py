@@ -55,13 +55,20 @@ w3 = Web3(Web3.HTTPProvider("https://mainnet.aurora.dev/"))
 nearpad_dex_router = init_nearpad_dex_router(w3)
 rose_frax_price = (nearpad_dex_router.functions.getAmountsOut(10 ** 18, [ROSE, FRAX]).call())[1]
 rose_frax_price = float(rose_frax_price) / 10**18
-rose_dai_price = (nearpad_dex_router.functions.getAmountsOut(10 ** 18, [ROSE, PAD, DAI]).call())[1]
-rose_dai_price = float(rose_dai_price) / 10**18
-rose_usdc_price = (nearpad_dex_router.functions.getAmountsOut(10 ** 18, [ROSE, PAD, USDC]).call())[1]
-rose_usdc_price = float(rose_usdc_price) / 10**18
-rose_usdt_price = (nearpad_dex_router.functions.getAmountsOut(10 ** 18, [ROSE, PAD, USDT]).call())[1]
-rose_usdt_price = float(rose_usdt_price) / 10**18
-roseprice = (rose_frax_price + rose_dai_price + rose_usdc_price + rose_usdt_price) / 4
+print("ROSE/FRAX Price:", rose_frax_price)
+# rose_dai_price = (nearpad_dex_router.functions.getAmountsIn(10 ** 18, [DAI, PAD, ROSE]).call())[1]
+# # rose_dai_price = (nearpad_dex_router.functions.getAmountsOut(10 ** 18, [ROSE, PAD, DAI]).call())[1]
+# rose_dai_price = float(rose_dai_price) / 10**18
+# print("ROSE/DAI Price:", rose_dai_price)
+# rose_usdc_price = (nearpad_dex_router.functions.getAmountsIn(10 ** 6, [USDC, PAD, ROSE]).call())[1]
+# # rose_usdc_price = (nearpad_dex_router.functions.getAmountsOut(10 ** 18, [ROSE, PAD, USDC]).call())[1]
+# # rose_usdc_price = float(rose_usdc_price) / 10**18
+# print("ROSE/USDC Price:", rose_usdc_price)
+# rose_usdt_price = (nearpad_dex_router.functions.getAmountsOut(10 ** 18, [ROSE, PAD, USDT]).call())[1]
+# rose_usdt_price = float(rose_usdt_price) / 10**18
+# print("ROSE/USDT Price:", rose_usdt_price)
+# roseprice = (rose_frax_price + rose_dai_price + rose_usdc_price + rose_usdt_price) / 4
+roseprice = rose_frax_price # temp 
 print("ROSE (averaged) price: ", roseprice)
 
 # get tvl of stROSE
