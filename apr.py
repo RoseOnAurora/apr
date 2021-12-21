@@ -24,18 +24,18 @@ lpAddresses = {
         "pool_address": "0xc90dB0d8713414d78523436dC347419164544A3f",
         "this_months_rewards": 450275.00
     },
-    # "Frax Farm": {
-    #     "deposited_token_address": "0xbB5279353d88A25F099A334Ba49CDCb1CF4b5A7c",
-    #     "farm_address": "0x7b359Af630a195C05Ac625D261aEe09a69aF7744",
-    #     "pool_address": "0xd812cc1fc1e0a56560796C746B1247e2bd4F31f2",
-    #     "this_months_rewards": 1000.00
-    # },
-    # "stRose Farm": {
-    #     "deposited_token_address": "0x7Ba8C17010a48283D38a4bd5f87EfEB5594c92f8",
-    #     "farm_address": "0x247c9DA96BfC4720580ee84E01566D79a8c901ca",
-    #     "pool_address": "0x36685AfD221622942Df61979d72a0064a17EF291",
-    #     "this_months_rewards": 1000.00
-    # },
+    "Frax Farm": {
+        "deposited_token_address": "0x4463A118A2fB34640ff8eF7Fe1B3abAcd4aC9fB7",
+        "farm_address": "0xB9D873cDc15e462f5414CCdFe618a679a47831b4",
+        "pool_address": "0xa34315F1ef49392387Dd143f4578083A9Bd33E94",
+        "this_months_rewards": 150092.00
+    },
+    "atUST Farm": {
+        "deposited_token_address": "0x94A7644E4D9CA0e685226254f88eAdc957D3c263",
+        "farm_address": "0x56DE5E2c25828040330CEF45258F3FFBc090777C",
+        "pool_address": "0x8fe44f5cce02D5BE44e3446bBc2e8132958d22B8",
+        "this_months_rewards": 1000.00
+    },
     "ROSE/FRAX PLP Farm": {
         "deposited_token_address": "0xeD4C231b98b474f7cAeCAdD2736e5ebC642ad707",
         "farm_address": "0x1B10bFCd6192edC573ced7Db7c7e403c7FAb8068",
@@ -116,12 +116,9 @@ for farmName, payload in lpAddresses.items():
         continue
 
     # calculate virtual price and TVL
-    if farmName == "Stables Farm":
-        # assume LP token = $1 for stables farm
-        virtualPrice = 1.0
-        farmTvl = farmBalance
-    elif farmName == "Frax Farm":
-        # assume LP token = $1 for frax farm
+    if farmName == "Stables Farm" or farmName == "Frax Farm" or farmName == "atUST Farm":
+        virtualPrice = roseprice
+        # assume LP token = $1
         virtualPrice = 1.0
         farmTvl = farmBalance
     elif farmName == "ROSE/FRAX PLP Farm":
