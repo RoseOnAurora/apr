@@ -30,7 +30,7 @@ lpAddresses = {
         "pool_address": "0xa34315F1ef49392387Dd143f4578083A9Bd33E94",
         "this_months_rewards": 150092.00
     },
-    "atUST Farm": {
+    "UST Farm": {
         "deposited_token_address": "0x94A7644E4D9CA0e685226254f88eAdc957D3c263",
         "farm_address": "0x56DE5E2c25828040330CEF45258F3FFBc090777C",
         "pool_address": "0x8fe44f5cce02D5BE44e3446bBc2e8132958d22B8",
@@ -116,7 +116,7 @@ for farmName, payload in lpAddresses.items():
         continue
 
     # calculate virtual price and TVL
-    if farmName == "Stables Farm" or farmName == "Frax Farm" or farmName == "atUST Farm":
+    if farmName == "Stables Farm" or farmName == "Frax Farm" or farmName == "UST Farm":
         virtualPrice = roseprice
         # assume LP token = $1
         virtualPrice = 1.0
