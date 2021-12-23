@@ -3,10 +3,10 @@
         "name": "Stables Farm",
         "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
         "farm_address": "0x52CACa9a2D52b27b28767d3649565774A3B991f3",
-        "farm_tvl": "1002075545124812480830231",
+        "farm_tvl": "1101970508800082800329829",
         "deposited_token_price": "1.0",
         "rewards_per_second": "0.17371720679012348",
-        "apr": "61.5%"
+        "apr": "44.7%"
     },
     {
         "name": "Frax Farm",
@@ -15,33 +15,33 @@
         "farm_tvl": "202342982614877937953031",
         "deposited_token_price": "1.0",
         "rewards_per_second": "0.05790586419753086",
-        "apr": "101.5%"
+        "apr": "81.2%"
     },
     {
         "name": "UST Farm",
         "deposited_token_address": "0x94A7644E4D9CA0e685226254f88eAdc957D3c263",
         "farm_address": "0x56DE5E2c25828040330CEF45258F3FFBc090777C",
-        "farm_tvl": "461509234179619348518642",
+        "farm_tvl": "464498252704091437984981",
         "deposited_token_price": "1.0",
         "rewards_per_second": "0.11581172839506172",
-        "apr": "89.0%"
+        "apr": "70.8%"
     },
     {
         "name": "ROSE/FRAX PLP Farm",
         "deposited_token_address": "0xeD4C231b98b474f7cAeCAdD2736e5ebC642ad707",
         "farm_address": "0x1B10bFCd6192edC573ced7Db7c7e403c7FAb8068",
-        "farm_tvl": "351880000000000000000000",
-        "deposited_token_price": "0.6768987448774473",
+        "farm_tvl": "314632000000000000000000",
+        "deposited_token_price": "0.6052461233894538",
         "rewards_per_second": "0.08685841049382717",
-        "apr": "87.6%"
+        "apr": "78.4%"
     },
     {
         "name": "ROSE/PAD PLP Farm",
         "deposited_token_address": "0xC6C3cc84EabD4643C382C988fA2830657fc70a6B",
         "farm_address": "0x9b2aE7d53099Ec64e2f6df3B4151FFCf7205f788",
-        "farm_tvl": "730911000000000000000000",
-        "deposited_token_price": "1.251041792585511",
+        "farm_tvl": "656706000000000000000000",
+        "deposited_token_price": "1.123330932882367",
         "rewards_per_second": "0.2026701388888889",
-        "apr": "98.4%"
+        "apr": "87.6%"
     }
 ]
