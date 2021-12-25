@@ -17,6 +17,10 @@ DAI = Web3.toChecksumAddress("0xe3520349F477A5F6EB06107066048508498A291b")
 USDC = Web3.toChecksumAddress("0xB12BFcA5A55806AaF64E99521918A4bf0fC40802")
 USDT = Web3.toChecksumAddress("0x4988a896b1227218e4A686fdE5EabdcAbd91571f")
 
+TEN18 = 10**18
+TEN18_INV = 1. / TEN18
+TEN6 = 10**6
+
 lpAddresses = {
     "Stables Farm": {
         "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
@@ -47,47 +51,70 @@ lpAddresses = {
         "this_months_rewards": 525321.00
     },
 }
+
+
+def pad_token_price(first, div0=TEN18):
+    div0_inv = 1. / div0
+    pad_token_out = (nearpad_dex_router.functions.getAmountsOut(TEN18, [PAD, first]).call())[1] * div0_inv
+    token_pad_in = (nearpad_dex_router.functions.getAmountsIn(TEN18, [first, PAD]).call())[0] * div0_inv
+    token_pad_out = (nearpad_dex_router.functions.getAmountsOut(div0, [first, PAD]).call())[1] * TEN18_INV
+    pad_token_in = (nearpad_dex_router.functions.getAmountsIn(div0, [PAD, first]).call())[0] * TEN18_INV
+    return (pad_token_out + token_pad_in + 1. / token_pad_out + 1. / pad_token_in) * 0.25
+
+
 data = []
 rose_data = []
 w3 = Web3(Web3.HTTPProvider("https://mainnet.aurora.dev/"))
 
 # get price of ROSE 
 nearpad_dex_router = init_nearpad_dex_router(w3)
-rose_frax_price = (nearpad_dex_router.functions.getAmountsOut(10 ** 18, [ROSE, FRAX]).call())[1]
-rose_frax_price = float(rose_frax_price) / 10**18
-print("ROSE/FRAX Price:", rose_frax_price)
-# rose_dai_price = (nearpad_dex_router.functions.getAmountsIn(10 ** 18, [DAI, PAD, ROSE]).call())[1]
-# # rose_dai_price = (nearpad_dex_router.functions.getAmountsOut(10 ** 18, [ROSE, PAD, DAI]).call())[1]
-# rose_dai_price = float(rose_dai_price) / 10**18
-# print("ROSE/DAI Price:", rose_dai_price)
-# rose_usdc_price = (nearpad_dex_router.functions.getAmountsIn(10 ** 6, [USDC, PAD, ROSE]).call())[1]
-# # rose_usdc_price = (nearpad_dex_router.functions.getAmountsOut(10 ** 18, [ROSE, PAD, USDC]).call())[1]
-# # rose_usdc_price = float(rose_usdc_price) / 10**18
-# print("ROSE/USDC Price:", rose_usdc_price)
-# rose_usdt_price = (nearpad_dex_router.functions.getAmountsOut(10 ** 18, [ROSE, PAD, USDT]).call())[1]
-# rose_usdt_price = float(rose_usdt_price) / 10**18
-# print("ROSE/USDT Price:", rose_usdt_price)
-# roseprice = (rose_frax_price + rose_dai_price + rose_usdc_price + rose_usdt_price) / 4
-roseprice = rose_frax_price # temp 
-print("ROSE (averaged) price: ", roseprice)
+
+# PAD/ROSE
+pad_rose_price = pad_token_price(ROSE)
+print('PAD/ROSE: {:.5g}'.format(pad_rose_price))
+
+# ROSE/FRAX
+rose_frax_price = (nearpad_dex_router.functions.getAmountsOut(TEN18, [ROSE, FRAX]).call())[1]
+rose_frax_price = float(rose_frax_price) * TEN18_INV
+print("ROSE/FRAX Price: {:.5g}".format(rose_frax_price))
+
+# ROSE/DAI
+pad_dai_price = pad_token_price(DAI, div0=TEN18)
+rose_dai_price = pad_dai_price / pad_rose_price
+print("ROSE/DAI Price: {:.5g}".format(rose_dai_price))
+
+# ROSE/USDC
+pad_usdc_price = pad_token_price(USDC, div0=TEN6)
+rose_usdc_price = pad_usdc_price / pad_rose_price
+print("ROSE/USDC Price: {:.5g}".format(rose_usdc_price))
+
+# ROSE/USDT
+pad_usdt_price = pad_token_price(USDT, div0=TEN6)
+rose_usdt_price = pad_usdt_price / pad_rose_price
+print("ROSE/USDT Price: {:.5g}".format(rose_usdt_price))
+
+# ROSE price
+rose_price = (rose_frax_price + rose_dai_price + rose_usdc_price + rose_usdt_price) * 0.25
+# roseprice = rose_frax_price # temp
+print("ROSE (averaged) price: {:.5g}".format(rose_price))
 
 # get tvl of stROSE
 rose_contract = init_token(w3, ROSE)
 strose_rose_balance_c = rose_contract.functions.balanceOf(STROSE).call()
-strose_rose_balance = float(strose_rose_balance_c) / 10**18
-strose_tvl = strose_rose_balance * roseprice
-strose_tvl = round(strose_tvl) * 10**18
+strose_rose_balance = float(strose_rose_balance_c) * TEN18_INV
+strose_tvl = strose_rose_balance * rose_price
+strose_tvl = round(strose_tvl) * TEN18
 
 # get price of stRose
 strose_contract = init_token(w3, STROSE)
 strose_total_supply = strose_contract.functions.totalSupply().call()
-strose_total_supply = float(strose_total_supply) / 10**18
+strose_total_supply = float(strose_total_supply) * TEN18_INV
 print("stRose total supply: ", strose_total_supply)
 strose_rose_ratio = strose_rose_balance / strose_total_supply
-stroseprice = roseprice * strose_rose_ratio
+stroseprice = rose_price * strose_rose_ratio
 
 rose_data.append({
-    "price_of_rose": str(roseprice),
+    "price_of_rose": str(rose_price),
     "price_of_strose": str(stroseprice),
     "strose_rose_ratio": str(strose_rose_ratio),
     "strose_tvl": str(strose_tvl),
@@ -117,16 +144,16 @@ for farmName, payload in lpAddresses.items():
 
     # calculate virtual price and TVL
     if farmName == "Stables Farm" or farmName == "Frax Farm" or farmName == "UST Farm":
-        virtualPrice = roseprice
+        virtualPrice = rose_price
         # assume LP token = $1
         virtualPrice = 1.0
         farmTvl = farmBalance
     elif farmName == "ROSE/FRAX PLP Farm":
-        farmBalance = farmBalance / 10**18
+        farmBalance = farmBalance * TEN18_INV
         try:
             rosefraxpool = init_rosefraxpool(w3)
             pool_reserves = rosefraxpool.functions.getReserves().call()
-            frax_reserves = round(float(pool_reserves[0]) / 10**18, 0)
+            frax_reserves = round(float(pool_reserves[0]) * TEN18_INV, 0)
             # assume pool is balanced and multiply FRAX reserve by two
             virtualPrice = float(frax_reserves*2) / float(farmBalance)
             farmTvl = int(round(farmBalance * virtualPrice))
@@ -139,11 +166,11 @@ for farmName, payload in lpAddresses.items():
         try:
             reserves = pool.functions.getReserves().call()
             reservesRose = float(reserves[1])
-            reservesRose = round(reservesRose / 10**18, 0)
+            reservesRose = round(reservesRose * TEN18_INV, 0)
             # assupme pool is balanced and multiply ROSE usd value reserves by two
-            virtualPrice = (reservesRose*roseprice)*2 / farmBalance
+            virtualPrice = (reservesRose * rose_price) * 2 / farmBalance
             farmTvl = int(round(farmBalance * virtualPrice))
-            farmTvl = farmTvl * 10**18
+            farmTvl = farmTvl * TEN18
         except:
             print("Error getting farm balance for", farmName)
 
@@ -155,8 +182,8 @@ for farmName, payload in lpAddresses.items():
     print(farmName, "deposits TVL:", farmTvlFloat)
     
     # calculate APR
-    apr_float = getAPR(roseprice, rewardsPerSecond, farmTvlFloat)
-    apr = str("{:0.1f}".format(apr_float)) + "%"
+    apr_float = getAPR(rose_price, rewardsPerSecond, farmTvlFloat)
+    apr = str("{:0.1f}%".format(apr_float))
     # apr = str(int(round(apr_float))) + "%"
 
     data.append({
