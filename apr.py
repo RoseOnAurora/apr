@@ -73,12 +73,12 @@ nearpad_dex_router = init_nearpad_dex_router(w3)
 pad_rose_price = pad_token_price(ROSE)
 print('PAD/ROSE: {:.5g}'.format(pad_rose_price))
 
-# PAD/FRAX
+# ROSE/FRAX
 rose_frax_price = (nearpad_dex_router.functions.getAmountsOut(TEN18, [ROSE, FRAX]).call())[1]
 rose_frax_price = float(rose_frax_price) * TEN18_INV
 print("ROSE/FRAX Price: {:.5g}".format(rose_frax_price))
 
-# PAD/DAI
+# ROSE/DAI
 pad_dai_price = pad_token_price(DAI, div0=TEN18)
 rose_dai_price = pad_dai_price / pad_rose_price
 print("ROSE/DAI Price: {:.5g}".format(rose_dai_price))
