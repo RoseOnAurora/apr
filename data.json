@@ -3,10 +3,10 @@
         "name": "Stables Farm",
         "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
         "farm_address": "0x52CACa9a2D52b27b28767d3649565774A3B991f3",
-        "farm_tvl": "8244587396934792996828461",
+        "farm_tvl": "8243560744089519578668715",
         "deposited_token_price": "1.0",
         "rewards_per_second": "0.17371720679012348",
-        "apr": "26.8%"
+        "apr": "26.6%"
     },
     {
         "name": "Frax Farm",
@@ -15,33 +15,33 @@
         "farm_tvl": "2295081471494911369676318",
         "deposited_token_price": "1.0",
         "rewards_per_second": "0.05790586419753086",
-        "apr": "32.1%"
+        "apr": "31.9%"
     },
     {
         "name": "UST Farm",
         "deposited_token_address": "0x94A7644E4D9CA0e685226254f88eAdc957D3c263",
         "farm_address": "0x56DE5E2c25828040330CEF45258F3FFBc090777C",
-        "farm_tvl": "5053922838042443663376246",
+        "farm_tvl": "5055028481254744731709041",
         "deposited_token_price": "1.0",
         "rewards_per_second": "0.11581172839506172",
-        "apr": "29.1%"
+        "apr": "28.9%"
     },
     {
         "name": "ROSE/FRAX PLP Farm",
         "deposited_token_address": "0xeD4C231b98b474f7cAeCAdD2736e5ebC642ad707",
         "farm_address": "0x1B10bFCd6192edC573ced7Db7c7e403c7FAb8068",
         "farm_tvl": "967580000000000000000000",
-        "deposited_token_price": "1.699696886321123",
+        "deposited_token_price": "1.281901370494121",
         "rewards_per_second": "0.08685841049382717",
-        "apr": "114.1%"
+        "apr": "113.4%"
     },
     {
         "name": "ROSE/PAD PLP Farm",
         "deposited_token_address": "0xC6C3cc84EabD4643C382C988fA2830657fc70a6B",
         "farm_address": "0x9b2aE7d53099Ec64e2f6df3B4151FFCf7205f788",
-        "farm_tvl": "2261547000000000000000000",
-        "deposited_token_price": "3.7198046484636187",
+        "farm_tvl": "2250101000000000000000000",
+        "deposited_token_price": "3.7009777385903493",
         "rewards_per_second": "0.2026701388888889",
-        "apr": "113.9%"
+        "apr": "113.8%"
     }
 ]
