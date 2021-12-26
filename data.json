@@ -3,25 +3,25 @@
         "name": "Stables Farm",
         "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
         "farm_address": "0x52CACa9a2D52b27b28767d3649565774A3B991f3",
-        "farm_tvl": "7759231204660654994850420",
+        "farm_tvl": "7459241238486752221849412",
         "deposited_token_price": "1.0",
         "rewards_per_second": "0.17371720679012348",
-        "apr": "23.7%"
+        "apr": "24.6%"
     },
     {
         "name": "Frax Farm",
         "deposited_token_address": "0x4463A118A2fB34640ff8eF7Fe1B3abAcd4aC9fB7",
         "farm_address": "0xB9D873cDc15e462f5414CCdFe618a679a47831b4",
-        "farm_tvl": "2172573330235284582691114",
+        "farm_tvl": "2202567392753156365120892",
         "deposited_token_price": "1.0",
         "rewards_per_second": "0.05790586419753086",
-        "apr": "28.2%"
+        "apr": "27.8%"
     },
     {
         "name": "UST Farm",
         "deposited_token_address": "0x94A7644E4D9CA0e685226254f88eAdc957D3c263",
         "farm_address": "0x56DE5E2c25828040330CEF45258F3FFBc090777C",
-        "farm_tvl": "7901215499119528322076250",
+        "farm_tvl": "7901220488672054422431967",
         "deposited_token_price": "1.0",
         "rewards_per_second": "0.11581172839506172",
         "apr": "15.5%"
@@ -30,18 +30,18 @@
         "name": "ROSE/FRAX PLP Farm",
         "deposited_token_address": "0xeD4C231b98b474f7cAeCAdD2736e5ebC642ad707",
         "farm_address": "0x1B10bFCd6192edC573ced7Db7c7e403c7FAb8068",
-        "farm_tvl": "920748000000000000000000",
-        "deposited_token_price": "1.1830225555618283",
+        "farm_tvl": "920034000000000000000000",
+        "deposited_token_price": "1.1821051730590466",
         "rewards_per_second": "0.08685841049382717",
-        "apr": "100.0%"
+        "apr": "99.9%"
     },
     {
         "name": "ROSE/PAD PLP Farm",
         "deposited_token_address": "0xC6C3cc84EabD4643C382C988fA2830657fc70a6B",
         "farm_address": "0x9b2aE7d53099Ec64e2f6df3B4151FFCf7205f788",
-        "farm_tvl": "2142890000000000000000000",
-        "deposited_token_price": "3.306014794692166",
+        "farm_tvl": "2138828000000000000000000",
+        "deposited_token_price": "3.299748379181592",
         "rewards_per_second": "0.2026701388888889",
-        "apr": "100.2%"
+        "apr": "100.3%"
     }
 ]
