@@ -3,10 +3,10 @@
         "name": "Stables Farm",
         "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
         "farm_address": "0x52CACa9a2D52b27b28767d3649565774A3B991f3",
-        "farm_tvl": "8132332916121856294049737",
+        "farm_tvl": "8151331028060473264822515",
         "deposited_token_price": "1.0",
         "rewards_per_second": "0.17371720679012348",
-        "apr": "19.6%"
+        "apr": "20.0%"
     },
     {
         "name": "Frax Farm",
@@ -15,33 +15,33 @@
         "farm_tvl": "2223917695721381586752495",
         "deposited_token_price": "1.0",
         "rewards_per_second": "0.05790586419753086",
-        "apr": "23.9%"
+        "apr": "24.4%"
     },
     {
         "name": "UST Farm",
         "deposited_token_address": "0x94A7644E4D9CA0e685226254f88eAdc957D3c263",
         "farm_address": "0x56DE5E2c25828040330CEF45258F3FFBc090777C",
-        "farm_tvl": "6563954312230325995638776",
+        "farm_tvl": "6559197340668949965451912",
         "deposited_token_price": "1.0",
         "rewards_per_second": "0.11581172839506172",
-        "apr": "16.2%"
+        "apr": "16.5%"
     },
     {
         "name": "ROSE/FRAX PLP Farm",
         "deposited_token_address": "0xeD4C231b98b474f7cAeCAdD2736e5ebC642ad707",
         "farm_address": "0x1B10bFCd6192edC573ced7Db7c7e403c7FAb8068",
-        "farm_tvl": "874488000000000000000000",
-        "deposited_token_price": "1.0985588089335507",
+        "farm_tvl": "879292000000000000000000",
+        "deposited_token_price": "1.1045937419664988",
         "rewards_per_second": "0.08685841049382717",
-        "apr": "91.1%"
+        "apr": "92.6%"
     },
     {
         "name": "ROSE/PAD PLP Farm",
         "deposited_token_address": "0xC6C3cc84EabD4643C382C988fA2830657fc70a6B",
         "farm_address": "0x9b2aE7d53099Ec64e2f6df3B4151FFCf7205f788",
-        "farm_tvl": "1905816000000000000000000",
-        "deposited_token_price": "2.994093024489172",
+        "farm_tvl": "1926834000000000000000000",
+        "deposited_token_price": "3.0271126581176064",
         "rewards_per_second": "0.2026701388888889",
-        "apr": "97.5%"
+        "apr": "98.5%"
     }
 ]
