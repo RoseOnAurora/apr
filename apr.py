@@ -1,5 +1,6 @@
 import json
 from web3 import Web3
+import time
 from utils import (
     init_rosefraxpool, 
     init_nearpad_dex_router,
@@ -66,6 +67,10 @@ data = []
 rose_data = []
 w3 = Web3(Web3.HTTPProvider("https://mainnet.aurora.dev/"))
 
+# read strose historical data from file
+with open("strose_ratio_historical.json", "r") as f:
+    strose_historical = json.load(f)
+
 # get price of ROSE 
 nearpad_dex_router = init_nearpad_dex_router(w3)
 
@@ -102,8 +107,8 @@ print("ROSE (averaged) price: {:.5g}".format(rose_price))
 rose_contract = init_token(w3, ROSE)
 strose_rose_balance_c = rose_contract.functions.balanceOf(STROSE).call()
 strose_rose_balance = float(strose_rose_balance_c) * TEN18_INV
-strose_tvl = strose_rose_balance * rose_price
-strose_tvl = round(strose_tvl) * TEN18
+strose_tvl_f = strose_rose_balance * rose_price
+strose_tvl = round(strose_tvl_f) * TEN18
 
 # get price of stRose
 strose_contract = init_token(w3, STROSE)
@@ -113,13 +118,44 @@ print("stRose total supply: ", strose_total_supply)
 strose_rose_ratio = strose_rose_balance / strose_total_supply
 stroseprice = rose_price * strose_rose_ratio
 
+# append ratio to historical data if 1 day has passed since last entry
+if time.time() >= strose_historical[-1]["time"] + 86400: # only append if 1 day has passed
+    strose_historical.append({
+        "value": strose_rose_ratio,
+        "time": int(time.time())
+    })
+
+    with open('strose_ratio_historical.json', 'w', encoding='utf-8') as f:
+        json.dump(strose_historical, f, ensure_ascii=False, indent=4)
+
+# calculate approximate ROSE reward rate and APR for stROSE for the last two weeks
+# reward rate is the difference in stROSE TVL using the stROSE ratio from two weeks ago
+index_of_two_weeks_ago = len(strose_historical) - 2 # second to last entry
+calculated_two_weeks_ago = strose_historical[-1]["time"] - 86400 * 14
+while strose_historical[index_of_two_weeks_ago]["time"] > calculated_two_weeks_ago:
+    index_of_two_weeks_ago -= 1 # find the earliest entry within 2 weeks
+ratio_of_two_weeks_ago = strose_historical[index_of_two_weeks_ago]["value"]
+ratio_increase = strose_rose_ratio - ratio_of_two_weeks_ago
+print ("Approximate stROSE ratio increase for two weeks: {:.5g}".format(ratio_increase))
+est_rewards_two_weeks = abs(1-ratio_increase * strose_tvl_f)
+est_rewards_per_second = est_rewards_two_weeks / 14 / 24 / 60 / 60
+print ("Estimated stROSE rewards for two weeks: ${:.5g}".format(est_rewards_two_weeks))
+print ("Approximate stROSE rewards per second: {:.5g}".format(est_rewards_per_second))
+strose_apr_float = getAPR(rose_price, est_rewards_per_second, strose_tvl_f)
+strose_apr = str("{:0.1f}%".format(strose_apr_float))
+print ("Approximate stRose APR: ", strose_apr)
+
 rose_data.append({
     "price_of_rose": str(rose_price),
     "price_of_strose": str(stroseprice),
     "strose_rose_ratio": str(strose_rose_ratio),
     "strose_tvl": str(strose_tvl),
+    "strose_apr": str(strose_apr),
     "total_rose_staked": str(strose_rose_balance_c)
 })
+
+with open('rose.json', 'w', encoding='utf-8') as f:
+    json.dump(rose_data, f, ensure_ascii=False, indent=4)
 
 # fetch apr for each farm
 for farmName, payload in lpAddresses.items():
@@ -184,7 +220,6 @@ for farmName, payload in lpAddresses.items():
     # calculate APR
     apr_float = getAPR(rose_price, rewardsPerSecond, farmTvlFloat)
     apr = str("{:0.1f}%".format(apr_float))
-    # apr = str(int(round(apr_float))) + "%"
 
     data.append({
         "name": farmName,
@@ -199,5 +234,4 @@ for farmName, payload in lpAddresses.items():
 with open('data.json', 'w', encoding='utf-8') as f:
     json.dump(data, f, ensure_ascii=False, indent=4)
 
-with open('rose.json', 'w', encoding='utf-8') as f:
-    json.dump(rose_data, f, ensure_ascii=False, indent=4)
+print("Done")
