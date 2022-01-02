@@ -137,9 +137,9 @@ while strose_historical[index_of_two_weeks_ago]["time"] > calculated_two_weeks_a
 ratio_of_two_weeks_ago = strose_historical[index_of_two_weeks_ago]["value"]
 ratio_increase = strose_rose_ratio - ratio_of_two_weeks_ago
 print ("Approximate stROSE ratio increase for two weeks: {:.5g}".format(ratio_increase))
-est_rewards_two_weeks = abs(1-ratio_increase * strose_tvl_f)
-est_rewards_per_second = est_rewards_two_weeks / 14 / 24 / 60 / 60
-print ("Estimated stROSE rewards for two weeks: ${:.5g}".format(est_rewards_two_weeks))
+est_rewards_n_time = abs(1-ratio_increase * strose_tvl_f)
+est_rewards_period = strose_historical[-1]["time"] - strose_historical[index_of_two_weeks_ago]["time"]
+est_rewards_per_second = float(est_rewards_n_time) / float(est_rewards_period)
 print ("Approximate stROSE rewards per second: {:.5g}".format(est_rewards_per_second))
 strose_apr_float = getAPR(rose_price, est_rewards_per_second, strose_tvl_f)
 strose_apr = str("{:0.1f}%".format(strose_apr_float))
