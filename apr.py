@@ -44,12 +44,12 @@ lpAddresses = {
     "ROSE/FRAX PLP Farm": {
         "deposited_token_address": "0xeD4C231b98b474f7cAeCAdD2736e5ebC642ad707",
         "farm_address": "0x1B10bFCd6192edC573ced7Db7c7e403c7FAb8068",
-        "this_months_rewards": 225137.00
+        "this_months_rewards": 157221.00
     },
     "ROSE/PAD PLP Farm": {
         "deposited_token_address": "0xC6C3cc84EabD4643C382C988fA2830657fc70a6B",
         "farm_address": "0x9b2aE7d53099Ec64e2f6df3B4151FFCf7205f788",
-        "this_months_rewards": 525321.00
+        "this_months_rewards": 412706.00
     },
 }
 
