@@ -27,7 +27,7 @@ lpAddresses = {
         "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
         "farm_address": "0x52CACa9a2D52b27b28767d3649565774A3B991f3",
         "pool_address": "0xc90dB0d8713414d78523436dC347419164544A3f",
-        "this_months_rewards": 450275.00
+        "this_months_rewards": 530622.00
     },
     "Frax Farm": {
         "deposited_token_address": "0x4463A118A2fB34640ff8eF7Fe1B3abAcd4aC9fB7",
