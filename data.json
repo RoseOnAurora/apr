@@ -3,10 +3,10 @@
         "name": "Stables Farm",
         "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
         "farm_address": "0x52CACa9a2D52b27b28767d3649565774A3B991f3",
-        "farm_tvl": "8841222364840326427374197",
+        "farm_tvl": "8842257416094821094479535",
         "deposited_token_price": "1.0",
         "rewards_per_second": "0.2047152777777778",
-        "apr": "30.8%"
+        "apr": "31.2%"
     },
     {
         "name": "Frax Farm",
@@ -15,7 +15,7 @@
         "farm_tvl": "2311696152510014185845299",
         "deposited_token_price": "1.0",
         "rewards_per_second": "0.05790586419753086",
-        "apr": "33.3%"
+        "apr": "33.8%"
     },
     {
         "name": "UST Farm",
@@ -24,24 +24,24 @@
         "farm_tvl": "5439338293481802495499149",
         "deposited_token_price": "1.0",
         "rewards_per_second": "0.11581172839506172",
-        "apr": "28.3%"
+        "apr": "28.7%"
     },
     {
         "name": "ROSE/FRAX PLP Farm",
         "deposited_token_address": "0xeD4C231b98b474f7cAeCAdD2736e5ebC642ad707",
         "farm_address": "0x1B10bFCd6192edC573ced7Db7c7e403c7FAb8068",
-        "farm_tvl": "1219924000000000000000000",
-        "deposited_token_price": "1.3255342892003346",
+        "farm_tvl": "1221774000000000000000000",
+        "deposited_token_price": "1.3271575341542983",
         "rewards_per_second": "0.060656249999999995",
-        "apr": "66.1%"
+        "apr": "66.9%"
     },
     {
         "name": "ROSE/PAD PLP Farm",
         "deposited_token_address": "0xC6C3cc84EabD4643C382C988fA2830657fc70a6B",
         "farm_address": "0x9b2aE7d53099Ec64e2f6df3B4151FFCf7205f788",
-        "farm_tvl": "2541162000000000000000000",
-        "deposited_token_price": "3.873027638512749",
+        "farm_tvl": "2558837000000000000000000",
+        "deposited_token_price": "3.899967134116499",
         "rewards_per_second": "0.15922299382716049",
-        "apr": "83.3%"
+        "apr": "83.9%"
     }
 ]
