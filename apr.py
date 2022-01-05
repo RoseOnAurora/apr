@@ -33,7 +33,7 @@ lpAddresses = {
         "deposited_token_address": "0x4463A118A2fB34640ff8eF7Fe1B3abAcd4aC9fB7",
         "farm_address": "0xB9D873cDc15e462f5414CCdFe618a679a47831b4",
         "pool_address": "0xa34315F1ef49392387Dd143f4578083A9Bd33E94",
-        "this_months_rewards": 150092.00
+        "this_months_rewards": 157221.00
     },
     "UST Farm": {
         "deposited_token_address": "0x94A7644E4D9CA0e685226254f88eAdc957D3c263",
