@@ -3,28 +3,28 @@
         "name": "Stables Farm",
         "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
         "farm_address": "0x52CACa9a2D52b27b28767d3649565774A3B991f3",
-        "farm_tvl": "9106296033958586031860161",
+        "farm_tvl": "9105902697652290767486587",
         "deposited_token_price": "1.0",
         "rewards_per_second": "0.2047152777777778",
-        "apr": "13.2%"
+        "apr": "13.1%"
     },
     {
         "name": "Frax Farm",
         "deposited_token_address": "0x4463A118A2fB34640ff8eF7Fe1B3abAcd4aC9fB7",
         "farm_address": "0xB9D873cDc15e462f5414CCdFe618a679a47831b4",
-        "farm_tvl": "2424591676159346834975874",
+        "farm_tvl": "2426664119650427075282920",
         "deposited_token_price": "1.0",
         "rewards_per_second": "0.060656249999999995",
-        "apr": "14.7%"
+        "apr": "14.6%"
     },
     {
         "name": "UST Farm",
         "deposited_token_address": "0x94A7644E4D9CA0e685226254f88eAdc957D3c263",
         "farm_address": "0x56DE5E2c25828040330CEF45258F3FFBc090777C",
-        "farm_tvl": "5222673122241143112669563",
+        "farm_tvl": "5232047761025088886803999",
         "deposited_token_price": "1.0",
         "rewards_per_second": "0.12131249999999999",
-        "apr": "13.6%"
+        "apr": "13.5%"
     },
     {
         "name": "ROSE/FRAX PLP Farm",
@@ -33,15 +33,15 @@
         "farm_tvl": "440456000000000000000000",
         "deposited_token_price": "0.8823704505164953",
         "rewards_per_second": "0.060656249999999995",
-        "apr": "80.7%"
+        "apr": "80.2%"
     },
     {
         "name": "ROSE/PAD PLP Farm",
         "deposited_token_address": "0xC6C3cc84EabD4643C382C988fA2830657fc70a6B",
         "farm_address": "0x9b2aE7d53099Ec64e2f6df3B4151FFCf7205f788",
-        "farm_tvl": "1241216000000000000000000",
-        "deposited_token_price": "1.8329388048750144",
+        "farm_tvl": "1240761000000000000000000",
+        "deposited_token_price": "1.8322664156008213",
         "rewards_per_second": "0.15922299382716049",
-        "apr": "75.2%"
+        "apr": "74.7%"
     }
 ]
