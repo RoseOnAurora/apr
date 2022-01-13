@@ -1,5 +1,10 @@
 import json
 
+# constants
+TEN18 = 10**18
+TEN18_INV = 1. / TEN18
+TEN6 = 10**6
+
 # for fetching USD price of Rose
 NEARPAD_ROSE_FRAX_POOL = "0xeD4C231b98b474f7cAeCAdD2736e5ebC642ad707"
 NEARPAD_DEX_ROUTER = "0xBaE0d7DFcd03C90EBCe003C58332c1346A72836A"
@@ -39,7 +44,7 @@ def init_rosepool(w3, poolAddress):
             abi=json.load(json_file)
         )
 
-def getAPR(rosePriceInUsd, roseRewardRate, totalStakedInUsd):
+def get_apr(rosePriceInUsd, roseRewardRate, totalStakedInUsd):
     if totalStakedInUsd == 0:
         return 0
     else:
@@ -49,4 +54,3 @@ def getAPR(rosePriceInUsd, roseRewardRate, totalStakedInUsd):
         futureValue = totalStakedInUsd + totalYearlyRewardsUsd
 
         return (float(totalYearlyRewardsUsd) / float(totalStakedInUsd)) * 100
-
