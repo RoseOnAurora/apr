@@ -224,7 +224,7 @@ for farmName, payload in lpAddresses.items():
     
     # calculate APR
     apr_float = get_apr(rose_price, rewardsPerSecond, farmTvlFloat)
-    apr = str("{:0.1f}%".format(apr_float))
+    apr = str("{:0.0f}%".format(apr_float))
 
     data.append({
         "name": farmName,
