@@ -24,6 +24,8 @@ USDT = Web3.toChecksumAddress("0x4988a896b1227218e4A686fdE5EabdcAbd91571f")
 
 pools = {
     "RoseStablesPool": "0xc90dB0d8713414d78523436dC347419164544A3f",
+    "FraxPool": "0xa34315F1ef49392387Dd143f4578083A9Bd33E94",
+    "USTPool": "0x8fe44f5cce02D5BE44e3446bBc2e8132958d22B8"
 }
 
 lpAddresses = {
@@ -36,13 +38,13 @@ lpAddresses = {
     "Frax Farm": {
         "deposited_token_address": "0x4463A118A2fB34640ff8eF7Fe1B3abAcd4aC9fB7",
         "farm_address": "0xB9D873cDc15e462f5414CCdFe618a679a47831b4",
-        "pool_address": "0xa34315F1ef49392387Dd143f4578083A9Bd33E94",
+        "pool_address": pools["FraxPool"],
         "this_months_rewards": 157221.00
     },
     "UST Farm": {
         "deposited_token_address": "0x94A7644E4D9CA0e685226254f88eAdc957D3c263",
         "farm_address": "0x56DE5E2c25828040330CEF45258F3FFBc090777C",
-        "pool_address": "0x8fe44f5cce02D5BE44e3446bBc2e8132958d22B8",
+        "pool_address": pools["USTPool"],
         "this_months_rewards": 314442.00
     },
     "ROSE/FRAX PLP Farm": {
@@ -129,19 +131,25 @@ for poolName, poolAddress in pools.items():
           volume
         }
       }}"""
-    result = requests.post(
-        "https://api.thegraph.com/subgraphs/name/roseonaurora/rose",
-        json={"query": query}
-    )
-    result = json.loads(result.text)['data'][poolName][0]
-    dailyVolume = result['dailyVolumes'][0]['volume']
-    totalDailyVolume += float(dailyVolume)
-    weeklyVolume = result['weeklyVolumes'][0]['volume']
-    pool_data.append({
-        "pool_name": poolName,
-        "daily_volume": dailyVolume,
-        "weekly_volume": weeklyVolume
-    })
+    print("making query: ", query)
+    try:
+        result = requests.post(
+            "https://api.thegraph.com/subgraphs/name/roseonaurora/rose",
+            json={"query": query}
+        )
+        result = json.loads(result.text)['data'][poolName][0]
+        print("result: ", result)
+        dailyVolume = result['dailyVolumes'][0]['volume']
+        totalDailyVolume += float(dailyVolume)
+        weeklyVolume = result['weeklyVolumes'][0]['volume']
+        pool_data.append({
+            "pool_name": poolName,
+            "daily_volume": dailyVolume,
+            "weekly_volume": weeklyVolume
+        })
+    except Exception as e:
+        print("error: ", e)
+        continue
 
 with open('pools.json', 'w', encoding='utf-8') as f:
     json.dump(pool_data, f, ensure_ascii=False, indent=4)
