@@ -23,9 +23,9 @@ USDC = Web3.toChecksumAddress("0xB12BFcA5A55806AaF64E99521918A4bf0fC40802")
 USDT = Web3.toChecksumAddress("0x4988a896b1227218e4A686fdE5EabdcAbd91571f")
 
 pools = {
-    "RoseStablesPool": "0xc90dB0d8713414d78523436dC347419164544A3f",
-    "FraxPool": "0xa34315F1ef49392387Dd143f4578083A9Bd33E94",
-    "USTPool": "0x8fe44f5cce02D5BE44e3446bBc2e8132958d22B8"
+    "RoseStablesPool": "0xc90db0d8713414d78523436dc347419164544a3f",
+    "FraxPool": "0xa34315f1ef49392387dd143f4578083a9bd33e94",
+    "USTPool": "0x8fe44f5cce02d5be44e3446bbc2e8132958d22b8"
 }
 
 lpAddresses = {
@@ -120,14 +120,22 @@ strose_rose_ratio = strose_rose_balance / strose_total_supply
 stroseprice = rose_price * strose_rose_ratio
 
 # fetch volume from subgraph for each pool
-totalDailyVolume = 0
+totalWeeklyVolume = 0
 for poolName, poolAddress in pools.items():
-    query = "{" + poolName + ": pools(where: {id: \"" + poolAddress.lower() + """\"})
+    query = "{" + poolName + ": pools(where: {id: \"" + poolAddress + """\"})
         {
-          dailyVolumes(first: 1) {
+          dailyVolumes(
+            first: 1
+            orderBy: timestamp,
+            orderDirection: desc
+          ) {
           volume
         }
-          weeklyVolumes(first: 1) {
+          weeklyVolumes(
+            first: 1
+            orderBy: timestamp,
+            orderDirection: desc
+          ) {
           volume
         }
       }}"""
@@ -140,8 +148,8 @@ for poolName, poolAddress in pools.items():
         result = json.loads(result.text)['data'][poolName][0]
         print("result: ", result)
         dailyVolume = result['dailyVolumes'][0]['volume']
-        totalDailyVolume += float(dailyVolume)
         weeklyVolume = result['weeklyVolumes'][0]['volume']
+        totalWeeklyVolume += float(weeklyVolume)
         pool_data.append({
             "pool_name": poolName,
             "daily_volume": dailyVolume,
@@ -155,7 +163,7 @@ with open('pools.json', 'w', encoding='utf-8') as f:
     json.dump(pool_data, f, ensure_ascii=False, indent=4)
 
 # calculate stROSE APR
-strose_apr_float = (((totalDailyVolume * 0.04 * 0.63) / strose_total_supply) * 365) / (strose_rose_ratio * rose_price)
+strose_apr_float = (((totalWeeklyVolume * 0.04 * 0.63 * 0.01) / strose_total_supply) * 52.14) / (strose_rose_ratio * rose_price)
 strose_apr = str("{:0.1f}%".format(strose_apr_float * 100))
 
 rose_data.append({
