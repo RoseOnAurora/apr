@@ -163,7 +163,7 @@ with open('pools.json', 'w', encoding='utf-8') as f:
     json.dump(pool_data, f, ensure_ascii=False, indent=4)
 
 # calculate stROSE APR
-strose_apr_float = (((totalWeeklyVolume * 0.04 * 0.63 * 0.01) / strose_total_supply) * 52.14) / (strose_rose_ratio * rose_price)
+strose_apr_float = (((totalWeeklyVolume * 0.0004 * 0.63) / strose_total_supply) * 52.14) / (strose_rose_ratio * rose_price)
 strose_apr = str("{:0.1f}%".format(strose_apr_float * 100))
 
 rose_data.append({
