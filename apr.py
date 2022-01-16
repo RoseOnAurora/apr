@@ -120,23 +120,25 @@ strose_rose_ratio = strose_rose_balance / strose_total_supply
 stroseprice = rose_price * strose_rose_ratio
 
 # fetch volume from subgraph for each pool
+totalDailyVolume = 0
 totalWeeklyVolume = 0
 for poolName, poolAddress in pools.items():
-    query = "{" + poolName + ": pools(where: {id: \"" + poolAddress + """\"})
-        {
-          dailyVolumes(
-            first: 1
+    query = "{" + poolName + ": pools(where: {id: \"" + poolAddress + """\"}){
+        dailyVolumes(
+            first: 2
             orderBy: timestamp,
             orderDirection: desc
-          ) {
-          volume
+        ) {
+            volume
+            timestamp
         }
-          weeklyVolumes(
-            first: 1
+        weeklyVolumes(
+            first: 2
             orderBy: timestamp,
             orderDirection: desc
-          ) {
-          volume
+        ) {
+            volume
+            timestamp
         }
       }}"""
     print("making query: ", query)
@@ -147,9 +149,12 @@ for poolName, poolAddress in pools.items():
         )
         result = json.loads(result.text)['data'][poolName][0]
         print("result: ", result)
-        dailyVolume = result['dailyVolumes'][0]['volume']
-        weeklyVolume = result['weeklyVolumes'][0]['volume']
+        dailyVolume = result['dailyVolumes'][1]['volume'] # last day
+        weeklyVolume = result['weeklyVolumes'][1]['volume'] # last week
+
+        totalDailyVolume += float(dailyVolume)
         totalWeeklyVolume += float(weeklyVolume)
+
         pool_data.append({
             "pool_name": poolName,
             "daily_volume": dailyVolume,
@@ -172,7 +177,9 @@ rose_data.append({
     "strose_rose_ratio": str(strose_rose_ratio),
     "strose_tvl": str(strose_tvl),
     "strose_apr": str(strose_apr),
-    "total_rose_staked": str(strose_rose_balance_c)
+    "total_rose_staked": str(strose_rose_balance_c),
+    "total_daily_volume": str(totalDailyVolume),
+    "total_weekly_volume": str(totalWeeklyVolume)
 })
 
 with open('rose.json', 'w', encoding='utf-8') as f:
