@@ -39,7 +39,9 @@ lpAddresses = {
         "deposited_token_address": "0x4463A118A2fB34640ff8eF7Fe1B3abAcd4aC9fB7",
         "farm_address": "0xB9D873cDc15e462f5414CCdFe618a679a47831b4",
         "pool_address": pools["FraxPool"],
-        "this_months_rewards": 157221.00
+        "this_months_rewards": 157221.00,
+        "second_rewards_token": "terra-luna",
+        "second_this_months_rewards": 500.00
     },
     "UST Farm": {
         "deposited_token_address": "0x94A7644E4D9CA0e685226254f88eAdc957D3c263",
@@ -249,6 +251,23 @@ for farmName, payload in lpAddresses.items():
     apr_float = get_apr(rose_price, rewardsPerSecond, farmTvlFloat)
     apr = str("{:0.0f}%".format(apr_float))
 
+    # calculate apr for second rewards token, if any
+    second_rewards_token = payload.get("second_rewards_token")
+    if second_rewards_token is not None:
+        try:
+            result = requests.get("https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd&ids=" + payload["second_rewards_token"])
+        except:
+            print("Error fetching second rewards token price")
+        second_rewards_per_second = payload["second_this_months_rewards"] / 30 / 24 / 60 / 60
+        second_token_price = result.json()[second_rewards_token]["usd"]
+        second_apr_float = get_apr(second_token_price, second_rewards_per_second, farmTvlFloat)
+        second_apr = str("{:0.0f}%".format(second_apr_float))
+    else:
+        second_apr = ""
+        second_rewards_token = ""
+        second_token_price = ""
+        second_rewards_per_second = ""
+
     data.append({
         "name": farmName,
         "deposited_token_address": payload["deposited_token_address"],
@@ -256,7 +275,11 @@ for farmName, payload in lpAddresses.items():
         "farm_tvl": str(farmTvl),
         "deposited_token_price": str(virtualPrice),
         "rewards_per_second": str(rewardsPerSecond),
-        "apr": apr, 
+        "apr": apr,
+        "second_rewards_token": second_rewards_token,
+        "second_apr": second_apr,
+        "second_token_price": str(second_token_price),
+        "second_rewards_per_second": str(second_rewards_per_second)
     })
 
 with open('data.json', 'w', encoding='utf-8') as f:
