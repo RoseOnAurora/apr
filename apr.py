@@ -39,15 +39,15 @@ lpAddresses = {
         "deposited_token_address": "0x4463A118A2fB34640ff8eF7Fe1B3abAcd4aC9fB7",
         "farm_address": "0xB9D873cDc15e462f5414CCdFe618a679a47831b4",
         "pool_address": pools["FraxPool"],
-        "this_months_rewards": 157221.00,
-        "second_rewards_token": "terra-luna",
-        "second_this_months_rewards": 500.00
+        "this_months_rewards": 157221.00
     },
     "UST Farm": {
         "deposited_token_address": "0x94A7644E4D9CA0e685226254f88eAdc957D3c263",
         "farm_address": "0x56DE5E2c25828040330CEF45258F3FFBc090777C",
         "pool_address": pools["USTPool"],
-        "this_months_rewards": 314442.00
+        "this_months_rewards": 314442.00,
+        "second_rewards_token": "terra-luna",
+        "second_this_months_rewards": 347.00
     },
     "ROSE/FRAX PLP Farm": {
         "deposited_token_address": "0xeD4C231b98b474f7cAeCAdD2736e5ebC642ad707",
