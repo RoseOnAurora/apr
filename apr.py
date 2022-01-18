@@ -23,28 +23,37 @@ USDC = Web3.toChecksumAddress("0xB12BFcA5A55806AaF64E99521918A4bf0fC40802")
 USDT = Web3.toChecksumAddress("0x4988a896b1227218e4A686fdE5EabdcAbd91571f")
 
 pools = {
-    "RoseStablesPool": "0xc90db0d8713414d78523436dc347419164544a3f",
-    "FraxPool": "0xa34315f1ef49392387dd143f4578083a9bd33e94",
-    "USTPool": "0x8fe44f5cce02d5be44e3446bbc2e8132958d22b8"
+    "Stables Pool": {
+        "pool_address": "0xc90db0d8713414d78523436dc347419164544a3f",
+        "contract_name": "RoseStablesPool"
+    },
+    "Frax Pool": {
+        "pool_address": "0xa34315f1ef49392387dd143f4578083a9bd33e94",
+        "contract_name": "FraxPool"
+    },
+    "UST Pool": {
+        "pool_address": "0x8fe44f5cce02d5be44e3446bbc2e8132958d22b8",
+        "contract_name": "USTPool"
+    }
 }
 
 lpAddresses = {
     "Stables Farm": {
         "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
         "farm_address": "0x52CACa9a2D52b27b28767d3649565774A3B991f3",
-        "pool_address": pools["RoseStablesPool"],
+        "pool_address": pools["Stables Pool"]["pool_address"],
         "this_months_rewards": 530622.00
     },
     "Frax Farm": {
         "deposited_token_address": "0x4463A118A2fB34640ff8eF7Fe1B3abAcd4aC9fB7",
         "farm_address": "0xB9D873cDc15e462f5414CCdFe618a679a47831b4",
-        "pool_address": pools["FraxPool"],
+        "pool_address": pools["Frax Pool"]["pool_address"],
         "this_months_rewards": 157221.00
     },
     "UST Farm": {
         "deposited_token_address": "0x94A7644E4D9CA0e685226254f88eAdc957D3c263",
         "farm_address": "0x56DE5E2c25828040330CEF45258F3FFBc090777C",
-        "pool_address": pools["USTPool"],
+        "pool_address": pools["UST Pool"]["pool_address"],
         "this_months_rewards": 314442.00,
         "second_rewards_token": "terra-luna",
         "second_rewards_token_address": "0xC4bdd27c33ec7daa6fcfd8532ddB524Bf4038096",
@@ -126,8 +135,8 @@ stroseprice = rose_price * strose_rose_ratio
 # fetch volume from subgraph for each pool
 totalDailyVolume = 0
 totalWeeklyVolume = 0
-for poolName, poolAddress in pools.items():
-    query = "{" + poolName + ": pools(where: {id: \"" + poolAddress + """\"}){
+for poolName, poolPayload in pools.items():
+    query = "{" + poolPayload["contract_name"] + ": pools(where: {id: \"" + poolPayload["pool_address"] + """\"}){
         dailyVolumes(
             first: 2
             orderBy: timestamp,
@@ -151,7 +160,7 @@ for poolName, poolAddress in pools.items():
             "https://api.thegraph.com/subgraphs/name/roseonaurora/rose",
             json={"query": query}
         )
-        result = json.loads(result.text)['data'][poolName][0]
+        result = json.loads(result.text)['data'][poolPayload["contract_name"]][0]
         print("result: ", result)
         dailyVolume = result['dailyVolumes'][1]['volume'] # last day
         weeklyVolume = result['weeklyVolumes'][1]['volume'] # last week
