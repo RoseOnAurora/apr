@@ -47,6 +47,7 @@ lpAddresses = {
         "pool_address": pools["USTPool"],
         "this_months_rewards": 314442.00,
         "second_rewards_token": "terra-luna",
+        "second_rewards_token_symbol": "atLUNA",
         "second_this_months_rewards": 347.00
     },
     "ROSE/FRAX PLP Farm": {
@@ -262,6 +263,7 @@ for farmName, payload in lpAddresses.items():
         second_token_price = result.json()[second_rewards_token]["usd"]
         second_apr_float = get_apr(second_token_price, second_rewards_per_second, farmTvlFloat)
         second_apr = str("{:0.0f}%".format(second_apr_float))
+        second_rewards_token = payload["second_rewards_token_symbol"]
     else:
         second_apr = ""
         second_rewards_token = ""
