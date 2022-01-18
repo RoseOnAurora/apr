@@ -47,6 +47,7 @@ lpAddresses = {
         "pool_address": pools["USTPool"],
         "this_months_rewards": 314442.00,
         "second_rewards_token": "terra-luna",
+        "second_rewards_token_address": "0xC4bdd27c33ec7daa6fcfd8532ddB524Bf4038096",
         "second_rewards_token_symbol": "atLUNA",
         "second_this_months_rewards": 347.00
     },
@@ -264,11 +265,13 @@ for farmName, payload in lpAddresses.items():
         second_apr_float = get_apr(second_token_price, second_rewards_per_second, farmTvlFloat)
         second_apr = str("{:0.0f}%".format(second_apr_float))
         second_rewards_token = payload["second_rewards_token_symbol"]
+        second_rewards_token_address = payload["second_rewards_token_address"]
     else:
         second_apr = ""
         second_rewards_token = ""
         second_token_price = ""
         second_rewards_per_second = ""
+        second_rewards_token_address = ""
 
     data.append({
         "name": farmName,
@@ -281,7 +284,8 @@ for farmName, payload in lpAddresses.items():
         "second_rewards_token": second_rewards_token,
         "second_apr": second_apr,
         "second_token_price": str(second_token_price),
-        "second_rewards_per_second": str(second_rewards_per_second)
+        "second_rewards_per_second": str(second_rewards_per_second),
+        "second_rewards_token_address": second_rewards_token_address
     })
 
 with open('data.json', 'w', encoding='utf-8') as f:
