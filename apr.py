@@ -70,6 +70,12 @@ lpAddresses = {
         "farm_address": "0x9b2aE7d53099Ec64e2f6df3B4151FFCf7205f788",
         "this_months_rewards": 412706.00
     },
+    "BUSD Farm" : {
+        "deposited_token_address": "0x158f57CF9A4DBFCD1Bc521161d86AeCcFC5aF3Bc",
+        "farm_address": "0x18A6115150A060F22Bacf62628169ee9b231368f",
+        "this_months_rewards": 123456.00, # change me
+        "pool_address": "0xD6cb7Bb7D63f636d1cA72A1D3ed6f7F67678068a"
+    }
 }
 
 data = []
@@ -217,10 +223,10 @@ for farmName, payload in lpAddresses.items():
         print(farmName, "deposits balance:", float(farmBalanceStr[:len(farmBalanceStr)-18]))
     except:
         print("Error fetching farm balance")
-        continue
+        pass
 
     # calculate virtual price and TVL
-    if farmName == "Stables Farm" or farmName == "Frax Farm" or farmName == "UST Farm":
+    if farmName == "Stables Farm" or farmName == "Frax Farm" or farmName == "UST Farm" or farmName == "BUSD Farm":
         virtualPrice = rose_price
         # assume LP token = $1
         virtualPrice = 1.0
@@ -255,7 +261,11 @@ for farmName, payload in lpAddresses.items():
     
     # format TVL to float for apr calculation
     farmTvl = str(farmTvl)
-    farmTvlFloat = float(farmTvl[:len(farmTvl)-18])
+    try:
+        farmTvlFloat = float(farmTvl[:len(farmTvl)-18])
+    except:
+        print("Error converting farm tvl to float")
+        farmTvlFloat = 0.0
     print(farmName, "deposits TVL:", farmTvlFloat)
     
     # calculate APR
