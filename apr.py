@@ -73,7 +73,7 @@ lpAddresses = {
     "BUSD Farm" : {
         "deposited_token_address": "0x158f57CF9A4DBFCD1Bc521161d86AeCcFC5aF3Bc",
         "farm_address": "0x18A6115150A060F22Bacf62628169ee9b231368f",
-        "this_months_rewards": 123456.00, # change me
+        "this_months_rewards": 157220.00,
         "pool_address": "0xD6cb7Bb7D63f636d1cA72A1D3ed6f7F67678068a"
     }
 }
