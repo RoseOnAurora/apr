@@ -34,7 +34,11 @@ pools = {
     "UST Pool": {
         "pool_address": "0x8fe44f5cce02d5be44e3446bbc2e8132958d22b8",
         "contract_name": "USTPool"
-    }
+    },
+    "BUSD Pool": {
+        "pool_address": "0xd6cb7bb7d63f636d1ca72a1d3ed6f7f67678068a",
+        "contract_name": "BUSDPool"
+    },
 }
 
 lpAddresses = {
@@ -74,7 +78,7 @@ lpAddresses = {
         "deposited_token_address": "0x158f57CF9A4DBFCD1Bc521161d86AeCcFC5aF3Bc",
         "farm_address": "0x18A6115150A060F22Bacf62628169ee9b231368f",
         "this_months_rewards": 157220.00,
-        "pool_address": "0xD6cb7Bb7D63f636d1cA72A1D3ed6f7F67678068a"
+        "pool_address": pools["BUSD Pool"]["pool_address"]
     }
 }
 
@@ -140,7 +144,7 @@ stroseprice = rose_price * strose_rose_ratio
 
 # fetch volume from subgraph for each pool
 totalDailyVolume = 0
-totalWeeklyVolume = 0
+# totalWeeklyVolume = 0
 for poolName, poolPayload in pools.items():
     query = "{" + poolPayload["contract_name"] + ": pools(where: {id: \"" + poolPayload["pool_address"] + """\"}){
         dailyVolumes(
@@ -163,21 +167,21 @@ for poolName, poolPayload in pools.items():
     print("making query: ", query)
     try:
         result = requests.post(
-            "https://api.thegraph.com/subgraphs/name/roseonaurora/rose",
+            "https://api.thegraph.com/subgraphs/name/roseonaurora/rose2",
             json={"query": query}
         )
         result = json.loads(result.text)['data'][poolPayload["contract_name"]][0]
         print("result: ", result)
         dailyVolume = result['dailyVolumes'][1]['volume'] # last day
-        weeklyVolume = result['weeklyVolumes'][1]['volume'] # last week
+        # weeklyVolume = result['weeklyVolumes'][1]['volume'] # last week
 
         totalDailyVolume += float(dailyVolume)
-        totalWeeklyVolume += float(weeklyVolume)
+        # totalWeeklyVolume += float(weeklyVolume)
 
         pool_data.append({
             "pool_name": poolName,
             "daily_volume": dailyVolume,
-            "weekly_volume": weeklyVolume
+            # "weekly_volume": weeklyVolume
         })
     except Exception as e:
         print("error: ", e)
@@ -187,7 +191,7 @@ with open('pools.json', 'w', encoding='utf-8') as f:
     json.dump(pool_data, f, ensure_ascii=False, indent=4)
 
 # calculate stROSE APR
-strose_apr_float = (((totalWeeklyVolume * 0.0004 * 0.63) / strose_total_supply) * 52.14) / (strose_rose_ratio * rose_price)
+strose_apr_float = (((totalDailyVolume * 0.0004 * 0.63) / strose_total_supply) * 365) / (strose_rose_ratio * rose_price)
 strose_apr = str("{:0.1f}%".format(strose_apr_float * 100))
 
 rose_data.append({
@@ -198,7 +202,7 @@ rose_data.append({
     "strose_apr": str(strose_apr),
     "total_rose_staked": str(strose_rose_balance_c),
     "total_daily_volume": str(totalDailyVolume),
-    "total_weekly_volume": str(totalWeeklyVolume)
+    # "total_weekly_volume": str(totalWeeklyVolume)
 })
 
 with open('rose.json', 'w', encoding='utf-8') as f:
