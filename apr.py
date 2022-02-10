@@ -39,6 +39,10 @@ pools = {
         "pool_address": "0xd6cb7bb7d63f636d1ca72a1d3ed6f7f67678068a",
         "contract_name": "BUSDPool"
     },
+    "MAI Pool": {
+        "pool_address": "0x65a761136815B45A9d78d9781d22d47247B49D23",
+        "contract_name": "MAIPool"
+    }
 }
 
 lpAddresses = {
@@ -79,6 +83,12 @@ lpAddresses = {
         "farm_address": "0x18A6115150A060F22Bacf62628169ee9b231368f",
         "this_months_rewards": 110055.00,
         "pool_address": pools["BUSD Pool"]["pool_address"]
+    },
+    "MAI Farm" : {
+        "deposited_token_address": "0xA7ae42224Bf48eCeFc5f838C230EE339E5fd8e62",
+        "farm_address": "0x226991aADeEfDe03bF557eF067da95fc613aBfFc",
+        "this_months_rewards": 47166.00,
+        "pool_address": pools["MAI Pool"]["pool_address"]
     }
 }
 
