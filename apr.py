@@ -284,7 +284,11 @@ for farmName, payload in lpAddresses.items():
     
     # calculate APR
     apr_float = get_apr(rose_price, rewardsPerSecond, farmTvlFloat)
-    apr = str("{:0.0f}%".format(apr_float))
+
+    if farmTvlFloat == 0:
+        apr = "-"
+    else:
+        apr = str("{:0.0f}%".format(apr_float))
 
     # calculate apr for second rewards token, if any
     second_rewards_token = payload.get("second_rewards_token")
