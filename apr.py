@@ -240,7 +240,7 @@ for farmName, payload in lpAddresses.items():
         pass
 
     # calculate virtual price and TVL
-    if farmName == "Stables Farm" or farmName == "Frax Farm" or farmName == "UST Farm" or farmName == "BUSD Farm":
+    if farmName == "Stables Farm" or farmName == "Frax Farm" or farmName == "UST Farm" or farmName == "BUSD Farm" or farmName == "MAI Farm":
         virtualPrice = rose_price
         # assume LP token = $1
         virtualPrice = 1.0
