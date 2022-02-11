@@ -286,7 +286,7 @@ for farmName, payload in lpAddresses.items():
     apr_float = get_apr(rose_price, rewardsPerSecond, farmTvlFloat)
 
     if farmTvlFloat == 0:
-        apr = "-"
+        apr = "∞%"
     else:
         apr = str("{:0.0f}%".format(apr_float))
 
