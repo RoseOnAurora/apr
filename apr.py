@@ -50,7 +50,7 @@ lpAddresses = {
         "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
         "farm_address": "0x52CACa9a2D52b27b28767d3649565774A3B991f3",
         "pool_address": pools["Stables Pool"]["pool_address"],
-        "this_months_rewards": 628885.00
+        "this_months_rewards": 676051.00
     },
     "Frax Farm": {
         "deposited_token_address": "0x4463A118A2fB34640ff8eF7Fe1B3abAcd4aC9fB7",
@@ -81,13 +81,13 @@ lpAddresses = {
     "BUSD Farm" : {
         "deposited_token_address": "0x158f57CF9A4DBFCD1Bc521161d86AeCcFC5aF3Bc",
         "farm_address": "0x18A6115150A060F22Bacf62628169ee9b231368f",
-        "this_months_rewards": 110055.00,
+        "this_months_rewards": 78611.00,
         "pool_address": pools["BUSD Pool"]["pool_address"]
     },
     "MAI Farm" : {
         "deposited_token_address": "0xA7ae42224Bf48eCeFc5f838C230EE339E5fd8e62",
         "farm_address": "0x226991aADeEfDe03bF557eF067da95fc613aBfFc",
-        "this_months_rewards": 47166.00,
+        "this_months_rewards": 31444.00,
         "pool_address": pools["MAI Pool"]["pool_address"]
     }
 }
