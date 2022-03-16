@@ -347,10 +347,7 @@ path = Path('historical.json')
 last_modified = path.stat().st_mtime
 
 with open('historical.json', 'a', encoding='utf-8') as f:
-    # if now - last_modified >= 24hours
-    json.dump(historical, f, ensure_ascii=False, indent=4)
-
-print(now)
-print(last_modified)
+    if now - last_modified >= 86400
+        json.dump(historical, f, ensure_ascii=False, indent=4)
 
 print("Done")
