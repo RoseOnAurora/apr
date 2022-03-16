@@ -2,6 +2,7 @@ import json
 from web3 import Web3
 import time
 import requests
+from pathlib import Path
 from utils import (
     init_rosefraxpool, 
     init_nearpad_dex_router,
@@ -95,6 +96,7 @@ lpAddresses = {
 data = []
 rose_data = []
 pool_data = []
+historical = []
 w3 = Web3(Web3.HTTPProvider("https://mainnet.aurora.dev/"))
 
 def get_pad_token_price(first, div0=TEN18):
@@ -189,6 +191,11 @@ for poolName, poolPayload in pools.items():
         # totalWeeklyVolume += float(weeklyVolume)
 
         pool_data.append({
+            "pool_name": poolName,
+            "daily_volume": dailyVolume,
+            # "weekly_volume": weeklyVolume
+        })
+        historical.append({
             "pool_name": poolName,
             "daily_volume": dailyVolume,
             # "weekly_volume": weeklyVolume
@@ -324,8 +331,26 @@ for farmName, payload in lpAddresses.items():
         "second_rewards_per_second": str(second_rewards_per_second),
         "second_rewards_token_address": second_rewards_token_address
     })
+    historical.append({
+        "name": farmName,
+        "farm_address": payload["farm_address"],
+        "apr": apr,
+        "second_apr": second_apr
+    })
 
 with open('data.json', 'w', encoding='utf-8') as f:
     json.dump(data, f, ensure_ascii=False, indent=4)
+
+# historical data file creation using subarray of volume and APR data values
+now = time.time()
+path = Path('apr\historical.json')
+last_modified = path.stat().st_mtime
+
+with open('historical.json', 'a', encoding='utf-8') as f:
+    # if now - last_modified >= 24hours
+    json.dump(historical, f, ensure_ascii=False, indent=4)
+
+print(now)
+print(last_modified)
 
 print("Done")
