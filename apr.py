@@ -343,7 +343,7 @@ with open('data.json', 'w', encoding='utf-8') as f:
 
 # historical data file creation using subarray of volume and APR data values
 now = time.time()
-path = Path('apr\historical.json')
+path = Path('..\apr\historical.json')
 last_modified = path.stat().st_mtime
 
 with open('historical.json', 'a', encoding='utf-8') as f:
