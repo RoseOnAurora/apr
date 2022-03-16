@@ -1,5 +1,6 @@
 import json
 from web3 import Web3
+from datetime import datetime
 import time
 import requests
 from pathlib import Path
@@ -101,8 +102,9 @@ w3 = Web3(Web3.HTTPProvider("https://mainnet.aurora.dev/"))
 
 # add current time as first value in historical array, also used later for comparison
 now = time.time()
+date = datetime.fromtimestamp(now).strftime("%A, %B %d, %Y %I:%M:%S")
 historical.append({
-    "time": now
+    "time": date
 })
 
 def get_pad_token_price(first, div0=TEN18):
