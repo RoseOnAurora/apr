@@ -99,6 +99,12 @@ pool_data = []
 historical = []
 w3 = Web3(Web3.HTTPProvider("https://mainnet.aurora.dev/"))
 
+# add current time as first value in historical array, also used later for comparison
+now = time.time()
+historical.append({
+    "time": now
+})
+
 def get_pad_token_price(first, div0=TEN18):
     div0_inv = 1. / div0
     pad_token_out = (nearpad_dex_router.functions.getAmountsOut(TEN18, [PAD, first]).call())[1] * div0_inv
@@ -342,7 +348,6 @@ with open('data.json', 'w', encoding='utf-8') as f:
     json.dump(data, f, ensure_ascii=False, indent=4)
 
 # historical data file creation using subarray of volume and APR data values
-now = time.time()
 path = Path('historical.json')
 last_modified = path.stat().st_mtime
 
