@@ -356,5 +356,9 @@ last_modified = path.stat().st_mtime
 with open('historical.json', 'a', encoding='utf-8') as f:
     if now - last_modified >= 86400:
         json.dump(historical, f, ensure_ascii=False, indent=4)
+        
+print("time now:", now)
+print("last_modified:", last_modified)
+print("difference:", now - last_modified)
 
 print("Done")
