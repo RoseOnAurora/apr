@@ -104,7 +104,8 @@ w3 = Web3(Web3.HTTPProvider("https://mainnet.aurora.dev/"))
 now = time.time()
 date = datetime.fromtimestamp(now).strftime("%A, %B %d, %Y %I:%M:%S")
 historical.append({
-    "time": date
+    "time": now,
+    "date": date
 })
 
 def get_pad_token_price(first, div0=TEN18):
@@ -350,8 +351,13 @@ with open('data.json', 'w', encoding='utf-8') as f:
     json.dump(data, f, ensure_ascii=False, indent=4)
 
 # historical data file creation using subarray of volume and APR data values
-path = Path('historical.json')
-last_modified = path.stat().st_mtime
+
+# path = Path('historical.json')
+# last_modified = path.stat().st_mtime
+
+with open("historical.json", "r") as f:
+    last_historical = json.load(f)
+    last_modified = last_historical[-1]["time"]
 
 with open('historical.json', 'a', encoding='utf-8') as f:
     if now - last_modified >= 86400:
