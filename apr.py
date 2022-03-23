@@ -356,7 +356,7 @@ with open('data.json', 'w', encoding='utf-8') as f:
 # last_modified = path.stat().st_mtime
 
 with open("historical.json", "r") as f:
-    last_historical = json.load(f)
+    last_historical = json.loads(f)
     last_modified = last_historical[-1]['time']
 
 with open('historical.json', 'a', encoding='utf-8') as f:
