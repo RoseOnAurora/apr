@@ -357,7 +357,7 @@ with open('data.json', 'w', encoding='utf-8') as f:
 
 with open("historical.json", "r") as f:
     last_historical = json.load(f)
-    last_modified = last_historical[-1][0][0]
+    last_modified = last_historical[-1][0]['time']
 
 with open('historical.json', 'a', encoding='utf-8') as f:
     if now - last_modified >= 86400:
