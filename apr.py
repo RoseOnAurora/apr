@@ -359,7 +359,7 @@ last_modified = int(last_historical[0]["time"])
 
 if time.time() >= last_modified + 86400:
     with open('historical.json', 'a', encoding='utf-8') as f:
-        json.dump(historical, f, ensure_ascii=False, indent=4)
+        json.dump(historical[0], f, ensure_ascii=False, indent=4)
         
 print("time now:", now)
 print("last_modified:", last_modified)
