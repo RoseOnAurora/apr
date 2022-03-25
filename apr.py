@@ -358,17 +358,11 @@ with open("historical.json", "r") as f:
 last_modified = int(last_historical[-1][0]["time"])
 
 # appends new array to previous 2d array and overwrites variable then json file
-print("pre-write historical array:", historical)
 last_historical.append(historical[0])
-historical = last_historical
-print("post-write historical array:", historical)   
+historical = last_historical 
 
 if time.time() >= last_modified + 86400:
     with open('historical.json', 'w', encoding='utf-8') as f:
         json.dump(historical, f, ensure_ascii=False, indent=4)
-        
-print("time now:", now)
-print("last_modified:", last_modified)
-print("difference:", now - last_modified)
 
 print("Done")
