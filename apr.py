@@ -353,13 +353,16 @@ with open('data.json', 'w', encoding='utf-8') as f:
 # historical data file creation using subarray of volume and APR data values
 
 with open("historical.json", "r") as f:
-    last_historical = json.load(f)[-1]
+    last_historical = json.load(f)
 
-last_modified = int(last_historical[0]["time"])
+last_modified = int(last_historical[-1][0]["time"])
+
+# appends new array to previous 2d array and overwrites variable then json file
+historical = last_historical.append(historical[0])
 
 if time.time() >= last_modified + 86400:
-    with open('historical.json', 'a', encoding='utf-8') as f:
-        json.dump(historical[0], f, ensure_ascii=False, indent=4)
+    with open('historical.json', 'w', encoding='utf-8') as f:
+        json.dump(historical, f, ensure_ascii=False, indent=4)
         
 print("time now:", now)
 print("last_modified:", last_modified)
