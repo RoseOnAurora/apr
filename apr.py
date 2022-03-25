@@ -358,8 +358,9 @@ with open("historical.json", "r") as f:
 last_modified = int(last_historical[-1][0]["time"])
 
 # appends new array to previous 2d array and overwrites variable then json file
-print("pre-write historical array:", historical) 
-historical = last_historical.append(historical[0])
+print("pre-write historical array:", historical)
+last_historical.append(historical[0])
+historical = last_historical
 print("post-write historical array:", historical)   
 
 if time.time() >= last_modified + 86400:
