@@ -97,13 +97,13 @@ lpAddresses = {
 data = []
 rose_data = []
 pool_data = []
-historical = []
+historical = [[]]
 w3 = Web3(Web3.HTTPProvider("https://mainnet.aurora.dev/"))
 
 # add current time as first value in historical array, also used later for comparison
 now = time.time()
 date = datetime.fromtimestamp(now).strftime("%A, %B %d, %Y %I:%M:%S")
-historical.append({
+historical[0].append({
     "time": now,
     "date": date
 })
@@ -204,7 +204,7 @@ for poolName, poolPayload in pools.items():
             "daily_volume": dailyVolume,
             # "weekly_volume": weeklyVolume
         })
-        historical.append({
+        historical[0].append({
             "pool_name": poolName,
             "daily_volume": dailyVolume,
             # "weekly_volume": weeklyVolume
@@ -340,7 +340,7 @@ for farmName, payload in lpAddresses.items():
         "second_rewards_per_second": str(second_rewards_per_second),
         "second_rewards_token_address": second_rewards_token_address
     })
-    historical.append({
+    historical[0].append({
         "name": farmName,
         "farm_address": payload["farm_address"],
         "apr": apr,
@@ -353,9 +353,11 @@ with open('data.json', 'w', encoding='utf-8') as f:
 # historical data file creation using subarray of volume and APR data values
 
 with open("historical.json", "r") as f:
-    last_historical = json.load(f)
+    last_historical = json.load(f)[-1]
 
-if time.time() >= last_historical[-1]["time"] + 86400:
+last_modified = int(last_historical[0]["time"])
+
+if time.time() >= last_modified + 86400:
     with open('historical.json', 'a', encoding='utf-8') as f:
         json.dump(historical, f, ensure_ascii=False, indent=4)
         
