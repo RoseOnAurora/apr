@@ -363,7 +363,8 @@ historical = last_historical.append(historical[0])
 if time.time() >= last_modified + 86400:
     with open('historical.json', 'w', encoding='utf-8') as f:
         json.dump(historical, f, ensure_ascii=False, indent=4)
-        
+       
+print("historical array:", historical)    
 print("time now:", now)
 print("last_modified:", last_modified)
 print("difference:", now - last_modified)
