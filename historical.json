@@ -510,5 +510,69 @@
             "apr": "29%",
             "second_apr": ""
         }
+    ],
+    [
+        {
+            "time": 1648849281.592726,
+            "date": "Friday, April 01, 2022 09:41:21"
+        },
+        {
+            "pool_name": "Stables Pool",
+            "daily_volume": "118995.1870117668058897885"
+        },
+        {
+            "pool_name": "Frax Pool",
+            "daily_volume": "10828.2680068697923190565"
+        },
+        {
+            "pool_name": "UST Pool",
+            "daily_volume": "108600.93896975589122289"
+        },
+        {
+            "pool_name": "BUSD Pool",
+            "daily_volume": "4854.162620323"
+        },
+        {
+            "name": "Stables Farm",
+            "farm_address": "0x52CACa9a2D52b27b28767d3649565774A3B991f3",
+            "apr": "31%",
+            "second_apr": ""
+        },
+        {
+            "name": "Frax Farm",
+            "farm_address": "0xB9D873cDc15e462f5414CCdFe618a679a47831b4",
+            "apr": "48%",
+            "second_apr": ""
+        },
+        {
+            "name": "UST Farm",
+            "farm_address": "0x56DE5E2c25828040330CEF45258F3FFBc090777C",
+            "apr": "13%",
+            "second_apr": "21%"
+        },
+        {
+            "name": "ROSE/FRAX PLP Farm",
+            "farm_address": "0x1B10bFCd6192edC573ced7Db7c7e403c7FAb8068",
+            "apr": "68%",
+            "second_apr": ""
+        },
+        {
+            "name": "ROSE/PAD PLP Farm",
+            "farm_address": "0x9b2aE7d53099Ec64e2f6df3B4151FFCf7205f788",
+            "apr": "59%",
+            "second_apr": ""
+        },
+        {
+            "name": "BUSD Farm",
+            "farm_address": "0x18A6115150A060F22Bacf62628169ee9b231368f",
+            "apr": "35%",
+            "second_apr": ""
+        },
+        {
+            "name": "MAI Farm",
+            "farm_address": "0x226991aADeEfDe03bF557eF067da95fc613aBfFc",
+            "apr": "45%",
+            "second_apr": ""
+        }
     ]
 ]
