@@ -50,19 +50,19 @@ lpAddresses = {
         "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
         "farm_address": "0x52CACa9a2D52b27b28767d3649565774A3B991f3",
         "pool_address": pools["Stables Pool"]["pool_address"],
-        "this_months_rewards": 676051.00
+        "this_months_rewards": 608446.00
     },
     "Frax Farm": {
         "deposited_token_address": "0x4463A118A2fB34640ff8eF7Fe1B3abAcd4aC9fB7",
         "farm_address": "0xB9D873cDc15e462f5414CCdFe618a679a47831b4",
         "pool_address": pools["Frax Pool"]["pool_address"],
-        "this_months_rewards": 157221.00
+        "this_months_rewards": 141499.00
     },
     "UST Farm": {
         "deposited_token_address": "0x94A7644E4D9CA0e685226254f88eAdc957D3c263",
         "farm_address": "0x56DE5E2c25828040330CEF45258F3FFBc090777C",
         "pool_address": pools["UST Pool"]["pool_address"],
-        "this_months_rewards": 314442.00,
+        "this_months_rewards": 282998.00,
         "second_rewards_token": "terra-luna",
         "second_rewards_token_address": "0xC4bdd27c33ec7daa6fcfd8532ddB524Bf4038096",
         "second_rewards_token_symbol": "atLUNA",
@@ -71,23 +71,23 @@ lpAddresses = {
     "ROSE/FRAX PLP Farm": {
         "deposited_token_address": "0xeD4C231b98b474f7cAeCAdD2736e5ebC642ad707",
         "farm_address": "0x1B10bFCd6192edC573ced7Db7c7e403c7FAb8068",
-        "this_months_rewards": 108090.00
+        "this_months_rewards": 97281.00
     },
     "ROSE/PAD PLP Farm": {
         "deposited_token_address": "0xC6C3cc84EabD4643C382C988fA2830657fc70a6B",
         "farm_address": "0x9b2aE7d53099Ec64e2f6df3B4151FFCf7205f788",
-        "this_months_rewards": 206353.00
+        "this_months_rewards": 185718.00
     },
     "BUSD Farm" : {
         "deposited_token_address": "0x158f57CF9A4DBFCD1Bc521161d86AeCcFC5aF3Bc",
         "farm_address": "0x18A6115150A060F22Bacf62628169ee9b231368f",
-        "this_months_rewards": 78611.00,
+        "this_months_rewards": 70750.00,
         "pool_address": pools["BUSD Pool"]["pool_address"]
     },
     "MAI Farm" : {
         "deposited_token_address": "0xA7ae42224Bf48eCeFc5f838C230EE339E5fd8e62",
         "farm_address": "0x226991aADeEfDe03bF557eF067da95fc613aBfFc",
-        "this_months_rewards": 31444.00,
+        "this_months_rewards": 28300.00,
         "pool_address": pools["MAI Pool"]["pool_address"]
     }
 }
