@@ -42,6 +42,10 @@ pools = {
     "MAI Pool": {
         "pool_address": "0x65a761136815B45A9d78d9781d22d47247B49D23",
         "contract_name": "MAIPool"
+    },
+    "RUSD Pool": {
+        "pool_address": "0x79B0a67a4045A7a8DC04b17456F4fe15339cBA34",
+        "contract_name": "RUSDPool"
     }
 }
 
@@ -89,6 +93,12 @@ lpAddresses = {
         "farm_address": "0x226991aADeEfDe03bF557eF067da95fc613aBfFc",
         "this_months_rewards": 28300.00,
         "pool_address": pools["MAI Pool"]["pool_address"]
+    },
+    "RUSD Farm" : {
+        "deposited_token_address": "0x19cc40283B057D6608C22F1D20F17e16C245642E",
+        "farm_address": "0x612F06042EDB323479B64535309B5b3b6947F2D4",
+        "this_months_rewards": 205070.00,
+        "pool_address": pools["RUSD Pool"]["pool_address"]
     }
 }
 
@@ -240,7 +250,7 @@ for farmName, payload in lpAddresses.items():
         pass
 
     # calculate virtual price and TVL
-    if farmName == "Stables Farm" or farmName == "Frax Farm" or farmName == "UST Farm" or farmName == "BUSD Farm" or farmName == "MAI Farm":
+    if farmName == "Stables Farm" or farmName == "Frax Farm" or farmName == "UST Farm" or farmName == "BUSD Farm" or farmName == "MAI Farm" or farmName == "RUSD Farm":
         virtualPrice = rose_price
         # assume LP token = $1
         virtualPrice = 1.0
