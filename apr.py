@@ -97,7 +97,7 @@ lpAddresses = {
     "RUSD Farm" : {
         "deposited_token_address": "0x19cc40283B057D6608C22F1D20F17e16C245642E",
         "farm_address": "0x612F06042EDB323479B64535309B5b3b6947F2D4",
-        "this_months_rewards": 205070.00,
+        "this_months_rewards": 857143.00,
         "pool_address": pools["RUSD Pool"]["pool_address"]
     }
 }
