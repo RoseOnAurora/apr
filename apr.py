@@ -95,8 +95,8 @@ lpAddresses = {
         "pool_address": pools["MAI Pool"]["pool_address"]
     },
     "RUSD Farm" : {
-        "deposited_token_address": "0x19cc40283B057D6608C22F1D20F17e16C245642E",
-        "farm_address": "0x612F06042EDB323479B64535309B5b3b6947F2D4",
+        "deposited_token_address": "0x56f87a0cB4713eB513BAf57D5E81750433F5fcB9",
+        "farm_address": "0x9286d58C1c8d434Be809221923Cf4575f7A4d058",
         "this_months_rewards": 857143.00,
         "pool_address": pools["RUSD Pool"]["pool_address"]
     }
