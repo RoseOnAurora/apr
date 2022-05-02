@@ -40,11 +40,11 @@ pools = {
         "contract_name": "BUSDPool"
     },
     "MAI Pool": {
-        "pool_address": "0x65a761136815B45A9d78d9781d22d47247B49D23",
+        "pool_address": "0x65a761136815b45a9d78d9781d22d47247b49d23",
         "contract_name": "MAIPool"
     },
     "RUSD Pool": {
-        "pool_address": "0x79B0a67a4045A7a8DC04b17456F4fe15339cBA34",
+        "pool_address": "0x79b0a67a4045a7a8dc04b17456f4fe15339cba34",
         "contract_name": "RUSDPool"
     }
 }
@@ -187,7 +187,7 @@ for poolName, poolPayload in pools.items():
     print("making query: ", query)
     try:
         result = requests.post(
-            "https://api.thegraph.com/subgraphs/name/roseonaurora/rose2",
+            "https://api.thegraph.com/subgraphs/name/roseonaurora/rose",
             json={"query": query}
         )
         result = json.loads(result.text)['data'][poolPayload["contract_name"]][0]
