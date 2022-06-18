@@ -4,6 +4,7 @@ import time
 import requests
 from utils import (
     init_rosefraxpool, 
+    init_garden,
     init_nearpad_dex_router,
     init_rosepool,
     init_nearpadpool,
@@ -13,6 +14,46 @@ from utils import (
     TEN18_INV,
     TEN6,
 )
+
+GARDEN_WBTC = Web3.toChecksumAddress("0x6bA5B45149996597d96e6dB19E4E1eFA81a6df97")
+GARDEN_NEAR = Web3.toChecksumAddress("0x64C922E3824ab40cbbEdd6C8092d148C283d3D3D")
+GARDEN_USDC = Web3.toChecksumAddress("0xfbAF3eBF228eB712b1267285787e51aDd70086bB")
+GARDEN_USDT = Web3.toChecksumAddress("0x0F44fCD177098Cb2B063B50f6C62e4F1E1f9d596")
+GARDEN_WETH = Web3.toChecksumAddress("0x084355FDd5fcfd55d60C5B8626756a6906576f13")
+GARDEN_UST = Web3.toChecksumAddress("0xe8F7F08D50e12145Cb722cfF861e6A9b43EADBA1")
+
+gardens = {
+    "WBTC": {
+        "address": GARDEN_WBTC,
+        "decimals": 8,
+        "coingecko": "wrapped-bitcoin"
+    },
+    "NEAR": {
+        "address": GARDEN_NEAR,
+        "decimals": 24,
+        "coingecko": "near"
+    },
+    "USDC": {
+        "address": GARDEN_USDC,
+        "decimals": 6,
+        "coingecko": "usd-coin"
+    },
+    "USDT": {
+        "address": GARDEN_USDT,
+        "decimals": 6,
+        "coingecko": "tether"
+    },
+    "WETH": {
+        "address": GARDEN_WETH,
+        "decimals": 18,
+        "coingecko": "ethereum"
+    },
+    "UST": {
+        "address": GARDEN_UST,
+        "decimals": 18,
+        "coingecko": "terrausd"
+    },
+}
 
 ROSE = Web3.toChecksumAddress("0xdcD6D4e2B3e1D1E1E6Fa8C21C8A323DcbecfF970")
 STROSE = Web3.toChecksumAddress("0xe23d2289FBca7De725DC21a13fC096787A85e16F")
@@ -180,14 +221,12 @@ for poolName, poolPayload in pools.items():
             timestamp
         }
       }}"""
-    print("making query: ", query)
     try:
         result = requests.post(
             "https://api.thegraph.com/subgraphs/name/roseonaurora/rose",
             json={"query": query}
         )
         result = json.loads(result.text)['data'][poolPayload["contract_name"]][0]
-        print("result: ", result)
         dailyVolume = result['dailyVolumes'][1]['volume'] # last day
         # weeklyVolume = result['weeklyVolumes'][1]['volume'] # last week
 
@@ -330,6 +369,58 @@ for farmName, payload in lpAddresses.items():
         "second_rewards_per_second": str(second_rewards_per_second),
         "second_rewards_token_address": second_rewards_token_address
     })
+
+gardensData = []
+totalCollateralValue = 0
+totalBorrowed = 0
+for garden_name, payload in gardens.items():
+    print(garden_name, "garden stats:")
+    # instantiate contract
+    garden = init_garden(w3, payload["address"])
+
+    # get token value
+    value = 0
+    try:
+        result = requests.get("https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd&ids=" + payload["coingecko"])
+        value = result.json()[payload["coingecko"]]["usd"]
+    except:
+        print("Error fetching garden token price")
+    print("token value: $", value)
+
+    # get total collateral and collateral value
+    collateral = garden.functions.totalCollateralShare().call()
+    collateral = float(collateral) * 1. / 10**(payload["decimals"])
+    print("collateral:", collateral, garden_name)
+    collateralValue = collateral * value
+    print("collateral value: $", collateralValue)
+    totalCollateralValue += collateralValue
+
+    # get borrowed
+    borrowed = garden.functions.totalBorrow().call()[0]
+    borrowed = float(borrowed) * TEN18_INV
+    print("borrowed:", borrowed, "RUSD")
+    totalBorrowed += borrowed
+
+    gardensData.append({
+        "garden": garden_name,
+        "token_value": value,
+        "collateral": collateral,
+        "collateral_value": collateralValue,
+        "borrowed": borrowed
+    })
+
+print("total borrowed:", totalBorrowed, "RUSD")
+print("total collateral: $", totalCollateralValue)
+totalCollateralRatio = totalCollateralValue / totalBorrowed
+print("total collateralization ratio:", (totalCollateralRatio * 100), "%")
+gardensData.append({
+    "total_borrowed": totalBorrowed,
+    "total_collateral_value": totalCollateralValue,
+    "total_collateralization_ratio": totalCollateralRatio
+})
+
+with open('gardens.json', 'w', encoding='utf-8') as f:
+    json.dump(gardensData, f, ensure_ascii=False, indent=4)
 
 with open('data.json', 'w', encoding='utf-8') as f:
     json.dump(data, f, ensure_ascii=False, indent=4)

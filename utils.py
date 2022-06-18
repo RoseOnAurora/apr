@@ -9,6 +9,13 @@ TEN6 = 10**6
 NEARPAD_ROSE_FRAX_POOL = "0xeD4C231b98b474f7cAeCAdD2736e5ebC642ad707"
 NEARPAD_DEX_ROUTER = "0xBaE0d7DFcd03C90EBCe003C58332c1346A72836A"
 
+def init_garden(w3, garden_address):
+    with open('abis/Garden.json') as json_file:
+        return w3.eth.contract(
+            address=garden_address,
+            abi=json.load(json_file)
+        )
+
 def init_rosefraxpool(w3):
     with open('abis/NearPadPool.json') as json_file:
         return w3.eth.contract(
