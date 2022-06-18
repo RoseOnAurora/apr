@@ -1,49 +1,49 @@
 [
     {
         "garden": "WBTC",
-        "token_value": 18475.55,
-        "collateral": 0.32456156,
-        "collateral_value": 5996.453329858,
-        "borrowed": 11546.869520263934
+        "token_value": 18341.01,
+        "collateral": 0.2293428,
+        "collateral_value": 4206.378588228,
+        "borrowed": 9920.496853981038
     },
     {
         "garden": "NEAR",
-        "token_value": 3.05,
+        "token_value": 3.04,
         "collateral": 2709.1829684999434,
-        "collateral_value": 8263.008053924827,
+        "collateral_value": 8235.916224239829,
         "borrowed": 16974.45366290018
     },
     {
         "garden": "USDC",
-        "token_value": 0.99862,
+        "token_value": 1.002,
         "collateral": 228575.414103,
-        "collateral_value": 228259.98003153782,
+        "collateral_value": 229032.564931206,
         "borrowed": 192753.54004286783
     },
     {
         "garden": "USDT",
-        "token_value": 1.003,
+        "token_value": 1.004,
         "collateral": 194531.665379,
-        "collateral_value": 195115.260375137,
+        "collateral_value": 195309.792040516,
         "borrowed": 158989.1405255352
     },
     {
         "garden": "WETH",
-        "token_value": 955.53,
-        "collateral": 13.994335079480791,
-        "collateral_value": 13372.00699849628,
-        "borrowed": 15972.616883562136
+        "token_value": 943.93,
+        "collateral": 11.600108864214794,
+        "collateral_value": 10949.690760198271,
+        "borrowed": 13854.388222488218
     },
     {
         "garden": "UST",
-        "token_value": 0.00646409,
+        "token_value": 0.0064033,
         "collateral": 2686.8547734123044,
-        "collateral_value": 17.36807107226674,
+        "collateral_value": 17.20473717059101,
         "borrowed": 27365.51047066501
     },
     {
-        "total_borrowed": 423602.1311057942,
-        "total_collateral_value": 451024.0768600262,
-        "total_collateralization_ratio": 1.0647351458847676
+        "total_borrowed": 419857.52977843746,
+        "total_collateral_value": 447751.54728155874,
+        "total_collateralization_ratio": 1.0664368637567159
     }
 ]
