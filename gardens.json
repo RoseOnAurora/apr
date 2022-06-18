@@ -1,49 +1,49 @@
 [
     {
         "garden": "WBTC",
-        "token_value": 17697.14,
+        "token_value": 17972.25,
         "collateral": 0.2293428,
-        "collateral_value": 4058.711639592,
+        "collateral_value": 4121.8061373,
         "borrowed": 9920.496853981038
     },
     {
         "garden": "NEAR",
-        "token_value": 2.93,
+        "token_value": 2.97,
         "collateral": 2709.1829684999434,
-        "collateral_value": 7937.906097704835,
-        "borrowed": 16974.45366290018
+        "collateral_value": 8046.273416444832,
+        "borrowed": 16826.071692612677
     },
     {
         "garden": "USDC",
-        "token_value": 0.999841,
+        "token_value": 1.005,
         "collateral": 228575.414103,
-        "collateral_value": 228539.0706121576,
+        "collateral_value": 229718.29117351497,
         "borrowed": 192753.54004286783
     },
     {
         "garden": "USDT",
-        "token_value": 0.994319,
+        "token_value": 1.002,
         "collateral": 194531.665379,
-        "collateral_value": 193426.5309879819,
+        "collateral_value": 194920.72870975803,
         "borrowed": 158989.1405255352
     },
     {
         "garden": "WETH",
-        "token_value": 897.38,
+        "token_value": 908.17,
         "collateral": 11.600108864214794,
-        "collateral_value": 10409.705692569072,
+        "collateral_value": 10534.87086721395,
         "borrowed": 13854.388222488218
     },
     {
         "garden": "UST",
-        "token_value": 0.0060294,
+        "token_value": 0.00618783,
         "collateral": 2686.8547734123044,
-        "collateral_value": 16.200122170812147,
+        "collateral_value": 16.62580057256386,
         "borrowed": 27365.51047066501
     },
     {
-        "total_borrowed": 419857.52977843746,
-        "total_collateral_value": 444388.12515217625,
-        "total_collateralization_ratio": 1.0584259984254274
+        "total_borrowed": 419709.14780815,
+        "total_collateral_value": 447358.5961048043,
+        "total_collateralization_ratio": 1.0658776403636858
     }
 ]
