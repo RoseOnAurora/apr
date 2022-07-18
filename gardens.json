@@ -1,49 +1,49 @@
 [
     {
         "garden": "WBTC",
-        "token_value": 22214,
+        "token_value": 22244,
         "collateral": 0.19890088,
-        "collateral_value": 4418.38414832,
+        "collateral_value": 4424.35117472,
         "borrowed": 9399.474074370844
     },
     {
         "garden": "NEAR",
         "token_value": 4.04,
-        "collateral": 2340.384966568261,
-        "collateral_value": 9455.155264935775,
-        "borrowed": 16558.708260270072
+        "collateral": 2290.3849665682606,
+        "collateral_value": 9253.155264935773,
+        "borrowed": 16428.71177328678
     },
     {
         "garden": "USDC",
-        "token_value": 1.002,
+        "token_value": 1.0,
         "collateral": 125579.473043,
-        "collateral_value": 125830.631989086,
+        "collateral_value": 125579.473043,
         "borrowed": 108681.24920795478
     },
     {
         "garden": "USDT",
-        "token_value": 1.0,
+        "token_value": 0.9996,
         "collateral": 164505.884746,
-        "collateral_value": 164505.884746,
+        "collateral_value": 164440.0823921016,
         "borrowed": 135175.37277304925
     },
     {
         "garden": "WETH",
-        "token_value": 1564.51,
+        "token_value": 1566.13,
         "collateral": 7.872804751080097,
-        "collateral_value": 12317.081761112322,
+        "collateral_value": 12329.835704809073,
         "borrowed": 11465.9829007232
     },
     {
         "garden": "UST",
-        "token_value": 0.04406468,
+        "token_value": 0.04443738,
         "collateral": 886.8329265711961,
-        "collateral_value": 39.078009122823254,
+        "collateral_value": 39.408531754556336,
         "borrowed": 27424.69481366437
     },
     {
-        "total_borrowed": 308705.4820300325,
-        "total_collateral_value": 316566.21591857687,
-        "total_collateralization_ratio": 1.0254635383759712
+        "total_borrowed": 308575.4855430492,
+        "total_collateral_value": 316066.306111321,
+        "total_collateralization_ratio": 1.024275488232933
     }
 ]
