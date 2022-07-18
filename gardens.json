@@ -1,49 +1,49 @@
 [
     {
         "garden": "WBTC",
-        "token_value": 21937,
+        "token_value": 22214,
         "collateral": 0.19890088,
-        "collateral_value": 4363.28860456,
+        "collateral_value": 4418.38414832,
         "borrowed": 9399.474074370844
     },
     {
         "garden": "NEAR",
-        "token_value": 4.01,
+        "token_value": 4.04,
         "collateral": 2340.384966568261,
-        "collateral_value": 9384.943715938725,
-        "borrowed": 16422.153034280436
+        "collateral_value": 9455.155264935775,
+        "borrowed": 16558.708260270072
     },
     {
         "garden": "USDC",
-        "token_value": 0.99539,
+        "token_value": 1.002,
         "collateral": 125579.473043,
-        "collateral_value": 125000.55167227177,
+        "collateral_value": 125830.631989086,
         "borrowed": 108681.24920795478
     },
     {
         "garden": "USDT",
-        "token_value": 0.994518,
+        "token_value": 1.0,
         "collateral": 164505.884746,
-        "collateral_value": 163604.06348582244,
+        "collateral_value": 164505.884746,
         "borrowed": 135175.37277304925
     },
     {
         "garden": "WETH",
-        "token_value": 1541.26,
+        "token_value": 1564.51,
         "collateral": 7.872804751080097,
-        "collateral_value": 12134.03905064971,
+        "collateral_value": 12317.081761112322,
         "borrowed": 11465.9829007232
     },
     {
         "garden": "UST",
-        "token_value": 0.04393184,
+        "token_value": 0.04406468,
         "collateral": 886.8329265711961,
-        "collateral_value": 38.96020223685754,
+        "collateral_value": 39.078009122823254,
         "borrowed": 27424.69481366437
     },
     {
-        "total_borrowed": 308568.9268040429,
-        "total_collateral_value": 314525.8467314795,
-        "total_collateralization_ratio": 1.0193049896149122
+        "total_borrowed": 308705.4820300325,
+        "total_collateral_value": 316566.21591857687,
+        "total_collateralization_ratio": 1.0254635383759712
     }
 ]
