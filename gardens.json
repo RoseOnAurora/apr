@@ -1,49 +1,49 @@
 [
     {
         "garden": "WBTC",
-        "token_value": 23814,
+        "token_value": 23801,
         "collateral": 0.19890088,
-        "collateral_value": 4736.62555632,
+        "collateral_value": 4734.03984488,
         "borrowed": 9399.474074370844
     },
     {
         "garden": "NEAR",
         "token_value": 4.42,
-        "collateral": 2240.384966568261,
-        "collateral_value": 9902.501552231714,
+        "collateral": 2285.384966568261,
+        "collateral_value": 10101.401552231713,
         "borrowed": 16187.640109671407
     },
     {
         "garden": "USDC",
-        "token_value": 1.0,
-        "collateral": 125579.473043,
-        "collateral_value": 125579.473043,
+        "token_value": 0.999913,
+        "collateral": 24761.778766,
+        "collateral_value": 24759.62449124736,
         "borrowed": 108681.24920795478
     },
     {
         "garden": "USDT",
-        "token_value": 1.0,
+        "token_value": 1.001,
         "collateral": 164505.884746,
-        "collateral_value": 164505.884746,
+        "collateral_value": 164670.39063074597,
         "borrowed": 135175.37277304925
     },
     {
         "garden": "WETH",
-        "token_value": 1721.19,
+        "token_value": 1722.5,
         "collateral": 7.876857923903036,
-        "collateral_value": 13557.569090042667,
-        "borrowed": 11465.9829007232
+        "collateral_value": 13567.88777392298,
+        "borrowed": 11481.268375486541
     },
     {
         "garden": "UST",
-        "token_value": 0.03538069,
+        "token_value": 0.03532558,
         "collateral": 886.8329265711961,
-        "collateral_value": 31.376760856808254,
+        "collateral_value": 31.327887494224917,
         "borrowed": 27424.69481366437
     },
     {
-        "total_borrowed": 308334.4138794338,
-        "total_collateral_value": 318313.4307484512,
-        "total_collateralization_ratio": 1.0323642656149288
+        "total_borrowed": 308349.6993541972,
+        "total_collateral_value": 217864.67218052223,
+        "total_collateralization_ratio": 0.7065506229998427
     }
 ]
