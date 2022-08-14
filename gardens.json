@@ -29,21 +29,21 @@
     },
     {
         "garden": "WETH",
-        "token_value": 1982.97,
+        "token_value": 1983.28,
         "collateral": 8.638230952426634,
-        "collateral_value": 17129.352831733442,
+        "collateral_value": 17132.030683328692,
         "borrowed": 12396.103597145147
     },
     {
         "garden": "UST",
-        "token_value": 0.02693299,
+        "token_value": 0.0270115,
         "collateral": 886.8329265711961,
-        "collateral_value": 23.88506234301276,
+        "collateral_value": 23.954687596077864,
         "borrowed": 27424.69481366437
     },
     {
         "total_borrowed": 180220.98285135548,
-        "total_collateral_value": 169378.9930488175,
-        "total_collateralization_ratio": 0.9398405799868468
+        "total_collateral_value": 169381.7405256658,
+        "total_collateralization_ratio": 0.939855825031041
     }
 ]
