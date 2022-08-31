@@ -1,49 +1,49 @@
 [
     {
         "garden": "WBTC",
-        "token_value": 20219,
+        "token_value": 20217,
         "collateral": 0.19890088,
-        "collateral_value": 4021.57689272,
+        "collateral_value": 4021.17909096,
         "borrowed": 9399.474074370844
     },
     {
         "garden": "NEAR",
-        "token_value": 4.41,
+        "token_value": 4.42,
         "collateral": 1584.0908918068287,
-        "collateral_value": 6985.840832868115,
+        "collateral_value": 7001.681741786183,
         "borrowed": 14564.847873873907
     },
     {
         "garden": "USDC",
-        "token_value": 1.002,
+        "token_value": 1.0,
         "collateral": 25108.33653,
-        "collateral_value": 25158.55320306,
+        "collateral_value": 25108.33653,
         "borrowed": 20012.96748600005
     },
     {
         "garden": "USDT",
-        "token_value": 1.001,
+        "token_value": 0.999697,
         "collateral": 112525.727746,
-        "collateral_value": 112638.253473746,
+        "collateral_value": 112491.63245049297,
         "borrowed": 96438.10594093513
     },
     {
         "garden": "WETH",
-        "token_value": 1570.98,
+        "token_value": 1575.06,
         "collateral": 7.8827020698796515,
-        "collateral_value": 12383.567297739535,
-        "borrowed": 11632.991681839289
+        "collateral_value": 12415.728722184644,
+        "borrowed": 11635.238496681048
     },
     {
         "garden": "UST",
-        "token_value": 0.02963889,
+        "token_value": 0.02939029,
         "collateral": 886.8329265711961,
-        "collateral_value": 26.28474355902176,
+        "collateral_value": 26.06427689347616,
         "borrowed": 27424.69481366437
     },
     {
-        "total_borrowed": 179473.08187068359,
-        "total_collateral_value": 161214.07644369267,
-        "total_collateralization_ratio": 0.8982632646819586
+        "total_borrowed": 179475.32868552534,
+        "total_collateral_value": 161064.62281231728,
+        "total_collateralization_ratio": 0.897419294294944
     }
 ]
