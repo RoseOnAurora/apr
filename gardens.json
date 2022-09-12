@@ -1,49 +1,49 @@
 [
     {
         "garden": "WBTC",
-        "token_value": 22407,
+        "token_value": 22317,
         "collateral": 0.19890088,
-        "collateral_value": 4456.77201816,
+        "collateral_value": 4438.87093896,
         "borrowed": 9399.474074370844
     },
     {
         "garden": "NEAR",
-        "token_value": 5.05,
+        "token_value": 5.03,
         "collateral": 2184.0908918068285,
-        "collateral_value": 11029.659003624483,
+        "collateral_value": 10985.977185788348,
         "borrowed": 15071.580287207027
     },
     {
         "garden": "USDC",
         "token_value": 1.001,
-        "collateral": 25108.33653,
-        "collateral_value": 25133.444866529997,
-        "borrowed": 20012.96748600005
+        "collateral": 25369.366414,
+        "collateral_value": 25394.735780413997,
+        "borrowed": 20256.660075962107
     },
     {
         "garden": "USDT",
-        "token_value": 0.999633,
+        "token_value": 1.0,
         "collateral": 82525.727746,
-        "collateral_value": 82495.44080391723,
+        "collateral_value": 82525.727746,
         "borrowed": 70640.21453686415
     },
     {
         "garden": "WETH",
-        "token_value": 1725.9,
+        "token_value": 1712.97,
         "collateral": 7.8827020698796515,
-        "collateral_value": 13604.75550240529,
+        "collateral_value": 13502.832164641746,
         "borrowed": 11635.238496681048
     },
     {
         "garden": "UST",
-        "token_value": 0.04651571,
+        "token_value": 0.0445388,
         "collateral": 886.8329265711961,
-        "collateral_value": 41.25166323083705,
+        "collateral_value": 39.49847434996919,
         "borrowed": 27424.69481366437
     },
     {
-        "total_borrowed": 154184.1696947875,
-        "total_collateral_value": 136761.32385786783,
-        "total_collateralization_ratio": 0.8869997751947638
+        "total_borrowed": 154427.86228474954,
+        "total_collateral_value": 136887.64229015406,
+        "total_collateralization_ratio": 0.8864180353526292
     }
 ]
