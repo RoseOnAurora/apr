@@ -1,9 +1,9 @@
 [
     {
         "garden": "WBTC",
-        "token_value": 20784,
+        "token_value": 20688,
         "collateral": 0.19890088,
-        "collateral_value": 4133.95588992,
+        "collateral_value": 4114.86140544,
         "borrowed": 9399.474074370844
     },
     {
@@ -15,35 +15,35 @@
     },
     {
         "garden": "USDC",
-        "token_value": 1.0,
+        "token_value": 0.999339,
         "collateral": 25369.366414,
-        "collateral_value": 25369.366414,
+        "collateral_value": 25352.597262800344,
         "borrowed": 20256.660075962107
     },
     {
         "garden": "USDT",
-        "token_value": 1.001,
+        "token_value": 0.999554,
         "collateral": 82525.727746,
-        "collateral_value": 82608.253473746,
+        "collateral_value": 82488.9212714253,
         "borrowed": 70640.21453686415
     },
     {
         "garden": "WETH",
-        "token_value": 1620.84,
+        "token_value": 1611.09,
         "collateral": 7.8827020698796515,
-        "collateral_value": 12776.598822943733,
+        "collateral_value": 12699.742477762407,
         "borrowed": 11635.238496681048
     },
     {
         "garden": "UST",
-        "token_value": 0.04552548,
+        "token_value": 0.04521302,
         "collateral": 886.8329265711961,
-        "collateral_value": 40.37349466195846,
+        "collateral_value": 40.096394845722024,
         "borrowed": 27424.69481366437
     },
     {
         "total_borrowed": 154427.86228474954,
-        "total_collateral_value": 134909.8434708289,
-        "total_collateralization_ratio": 0.8736107686452891
+        "total_collateral_value": 134677.51418783097,
+        "total_collateralization_ratio": 0.8721063167959878
     }
 ]
