@@ -1,49 +1,49 @@
 [
     {
         "garden": "WBTC",
-        "token_value": 18950.89,
+        "token_value": 18902.7,
         "collateral": 0.19890088,
-        "collateral_value": 3769.3486977832,
+        "collateral_value": 3759.763664376,
         "borrowed": 9399.474074370844
     },
     {
         "garden": "NEAR",
-        "token_value": 3.75,
+        "token_value": 3.73,
         "collateral": 2184.0908918068285,
-        "collateral_value": 8190.340844275607,
+        "collateral_value": 8146.65902643947,
         "borrowed": 15071.580287207027
     },
     {
         "garden": "USDC",
-        "token_value": 1.003,
+        "token_value": 1.004,
         "collateral": 13836.952465,
-        "collateral_value": 13878.463322394999,
+        "collateral_value": 13892.300274860001,
         "borrowed": 9825.737032840174
     },
     {
         "garden": "USDT",
-        "token_value": 1.001,
+        "token_value": 1.002,
         "collateral": 84530.475042,
-        "collateral_value": 84615.005517042,
-        "borrowed": 72223.77177790941
+        "collateral_value": 84699.53599208401,
+        "borrowed": 71195.98907587901
     },
     {
         "garden": "WETH",
-        "token_value": 1306.77,
+        "token_value": 1303.37,
         "collateral": 7.883745065175728,
-        "collateral_value": 10302.241538819686,
+        "collateral_value": 10275.436805598089,
         "borrowed": 11435.228012002484
     },
     {
         "garden": "UST",
-        "token_value": 0.03085797,
+        "token_value": 0.0309642,
         "collateral": 886.8329265711961,
-        "collateral_value": 27.365863843146172,
+        "collateral_value": 27.460072104935833,
         "borrowed": 27424.69481366437
     },
     {
-        "total_borrowed": 145380.4859979943,
-        "total_collateral_value": 120782.76578415863,
-        "total_collateralization_ratio": 0.8308045261715865
+        "total_borrowed": 144352.7032959639,
+        "total_collateral_value": 120801.1558354625,
+        "total_collateralization_ratio": 0.8368472018690633
     }
 ]
