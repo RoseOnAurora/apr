@@ -1,49 +1,49 @@
 [
     {
         "garden": "WBTC",
-        "token_value": 20085,
+        "token_value": 20061,
         "collateral": 0.19890088,
-        "collateral_value": 3994.9241748,
+        "collateral_value": 3990.15055368,
         "borrowed": 9399.474074370844
     },
     {
         "garden": "NEAR",
-        "token_value": 3.8,
+        "token_value": 3.76,
         "collateral": 2184.0908918068285,
-        "collateral_value": 8299.545388865949,
-        "borrowed": 15071.580287207027
+        "collateral_value": 8212.181753193674,
+        "borrowed": 14591.471581074013
     },
     {
         "garden": "USDC",
-        "token_value": 1.002,
+        "token_value": 1.001,
         "collateral": 13836.952465,
-        "collateral_value": 13864.62636993,
+        "collateral_value": 13850.789417465,
         "borrowed": 9825.737032840174
     },
     {
         "garden": "USDT",
-        "token_value": 1.001,
+        "token_value": 0.998865,
         "collateral": 84530.475042,
-        "collateral_value": 84615.005517042,
+        "collateral_value": 84434.53295282733,
         "borrowed": 66069.09306188706
     },
     {
         "garden": "WETH",
-        "token_value": 1383.91,
+        "token_value": 1380.67,
         "collateral": 7.883745065175728,
-        "collateral_value": 10910.393633147343,
+        "collateral_value": 10884.850299136173,
         "borrowed": 11435.228012002484
     },
     {
         "garden": "UST",
-        "token_value": 0.03242542,
+        "token_value": 0.0335973,
         "collateral": 886.8329265711961,
-        "collateral_value": 28.7559301139002,
+        "collateral_value": 29.795191883890446,
         "borrowed": 27424.69481366437
     },
     {
-        "total_borrowed": 139225.80728197197,
-        "total_collateral_value": 121713.25101389918,
-        "total_collateralization_ratio": 0.8742147263502315
+        "total_borrowed": 138745.69857583893,
+        "total_collateral_value": 121402.30016818606,
+        "total_collateralization_ratio": 0.8749986588004175
     }
 ]
