@@ -8,16 +8,16 @@
     },
     {
         "garden": "NEAR",
-        "token_value": 3.61,
+        "token_value": 0,
         "collateral": 1584.0908919220872,
-        "collateral_value": 5718.568119838735,
+        "collateral_value": 0.0,
         "borrowed": 14586.762376050729
     },
     {
         "garden": "USDC",
-        "token_value": 1.002,
+        "token_value": 0,
         "collateral": 13836.952465,
-        "collateral_value": 13864.62636993,
+        "collateral_value": 0.0,
         "borrowed": 9825.737032840174
     },
     {
@@ -43,7 +43,7 @@
     },
     {
         "total_borrowed": 138742.31753693504,
-        "total_collateral_value": 19583.194489768735,
-        "total_collateralization_ratio": 0.14114795570252336
+        "total_collateral_value": 0.0,
+        "total_collateralization_ratio": 0.0
     }
 ]
