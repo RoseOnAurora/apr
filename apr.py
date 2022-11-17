@@ -95,13 +95,13 @@ lpAddresses = {
         "deposited_token_address": "0xfF79D5bff48e1C01b722560D6ffDfCe9FC883587",
         "farm_address": "0x52CACa9a2D52b27b28767d3649565774A3B991f3",
         "pool_address": pools["Stables Pool"]["pool_address"],
-        "this_months_rewards": 608446.00
+        "this_months_rewards": 547601.00
     },
     "Frax Farm": {
         "deposited_token_address": "0x4463A118A2fB34640ff8eF7Fe1B3abAcd4aC9fB7",
         "farm_address": "0xB9D873cDc15e462f5414CCdFe618a679a47831b4",
         "pool_address": pools["Frax Pool"]["pool_address"],
-        "this_months_rewards": 141499.00
+        "this_months_rewards": 127349.00
     },
     "UST Farm": {
         "deposited_token_address": "0x94A7644E4D9CA0e685226254f88eAdc957D3c263",
@@ -117,24 +117,24 @@ lpAddresses = {
     "ROSE/PAD PLP Farm": {
         "deposited_token_address": "0xC6C3cc84EabD4643C382C988fA2830657fc70a6B",
         "farm_address": "0x9b2aE7d53099Ec64e2f6df3B4151FFCf7205f788",
-        "this_months_rewards": 185718.00
+        "this_months_rewards": 167162.00
     },
     "BUSD Farm" : {
         "deposited_token_address": "0x158f57CF9A4DBFCD1Bc521161d86AeCcFC5aF3Bc",
         "farm_address": "0x18A6115150A060F22Bacf62628169ee9b231368f",
-        "this_months_rewards": 70750.00,
+        "this_months_rewards": 63675.00,
         "pool_address": pools["BUSD Pool"]["pool_address"]
     },
     "MAI Farm" : {
         "deposited_token_address": "0xA7ae42224Bf48eCeFc5f838C230EE339E5fd8e62",
         "farm_address": "0x226991aADeEfDe03bF557eF067da95fc613aBfFc",
-        "this_months_rewards": 28300.00,
+        "this_months_rewards": 25470.00,
         "pool_address": pools["MAI Pool"]["pool_address"]
     },
     "RUSD Farm" : {
         "deposited_token_address": "0x56f87a0cB4713eB513BAf57D5E81750433F5fcB9",
         "farm_address": "0x9286d58C1c8d434Be809221923Cf4575f7A4d058",
-        "this_months_rewards": 1140141.00,
+        "this_months_rewards": 771894.00,
         "pool_address": pools["RUSD Pool"]["pool_address"]
     }
 }
